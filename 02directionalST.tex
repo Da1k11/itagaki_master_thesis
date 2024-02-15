@@ -1,0 +1,811 @@
+\documentclass[11pt,a4j]{jreport}
+\input{preamble.tex}
+
+\begin{document}
+
+\chapter{反射音到来方向の物理的評価}
+
+%=======================================================================
+
+\section{はじめに}
+ステージへの反射音到来方向の物理的評価に関する議論に先立って、ステージ音響学について、特にその指標値が今日用いられるようになるまでの経緯に着目して既往の研究を概観する。
+
+\subsection*{Gadeによるステージ音響指標STの提案}
+Gadeは1989年に発表した論文\cite{Gade1989I}の中で、オーケストラ団員に対するインタビューを通して演奏家のホールに対する評価項目を「響き（Reverberance）」「自分の音の聞きやすさ（Support）」「音色（Timbre）」「ダイナミクス（Dynamics）」「互いの音の聞きやすさ（Hearing Each Other）」「時差（Time Delay）」の6つにまとめている。このうち「自分の音の聞きやすさ（Support）」に関して、演奏者自身が発する音に対する初期反射音成分の寄与を評価することを意図し、演奏者に返ってくる音のエネルギーを床からの反射音を含む直接音のエネルギーで基準化してdBで定量化する指標ST（SUPPORT）を考案して、20-100msまたは20-200msの短い時間に到来する反射音を評価する $\mathrm{ST1}$と$\mathrm{ST2}$を式（\ref{eq:ST1}）（\ref{eq:ST2}）の通り定義した。
+
+\begin{equation}
+  \label{eq:ST1}
+  \mathrm{ST1}= 10 \log_{10}
+  \frac{\int_{20 \: \mathrm{ms}}^{100 \: \mathrm{ms}} p^2(t) dt}
+  {\int_{0 \: \mathrm{ms}}^{10 \: \mathrm{ms}} \: p^2(t) \: dt}
+\end{equation}
+
+\begin{equation}
+  \label{eq:ST2}
+  \mathrm{ST2}= 10 \log_{10}
+  \frac{\int_{20 \: \mathrm{ms}}^{200 \: \mathrm{ms}} p^2(t) dt}
+  {\int_{0 \: \mathrm{ms}}^{10 \: \mathrm{ms}} \: p^2(t) \: dt}
+\end{equation}
+
+\vspace{1\baselineskip}
+
+ここで、$p(t)$は音源から舞台後方側に距離$\SI{1.0}{m}$離して設置した無指向性マイクにて測定したインパルス応答を示し、音源および受音点の高さは床から$\SI{1.0}{m}$で、時刻$\SI{0}{ms}$は直接音がマイクに到来した時刻を表す。
+  
+$\mathrm{ST1}$および$\mathrm{ST2}$の値はステージ上の測定位置によって異なった値を取るが、同時に発表されたこれらの実測を含む研究\cite{Gade1989II}では、典型的なソリストの位置、チェロ奏者の位置、木管楽器の位置の三点がステージの代表点とされた。分析対象の周波数帯域は$\SI{250}{\Hz}$から$\SI{2000}{\Hz}$を中心とする4帯域の1/1オクターブバンドであり、全帯域および全測定点の計算値の算術平均をホールにおける単一の指標値として$\mathrm{ST}$が算出されている。さらに、反射音のエネルギーの大部分は$\mathrm{ST1}$および$\mathrm{ST2}$の評価区間の間に到来するものの、Gadeは同論文にて実施した演奏実験の中で「響き（Reverberance）」および「ダイナミクス（Dynamics）」の評価項目に関して後期反射音が演奏者に与える影響について指摘した上で、これらの評価項目に関わる後期反射音のエネルギーを直接評価する指標として$\mathrm{ST_{Late}}$を式（\ref{STLate}）の通り提案している。
+  
+\begin{equation}
+  \label{STLate}
+  \mathrm{ST_{Late}}= 10 \log_{10}
+  \frac{\int_{100 \: \mathrm{ms}}^{1000 \: \mathrm{ms}} p^2(t) dt}
+  {\int_{0 \: \mathrm{ms}}^{10 \: \mathrm{ms}} \: p^2(t) \: dt}
+\end{equation}
+
+%=======================================================================
+
+\subsection*{STに関する研究の展開}
+前項で示したGadeの研究を嚆矢として、ステージ上での物理的な測定による評価を含む研究がいくつか行われた。
+
+Chiangら\cite{chiang2003}は、舞台面積が$\SI{49}{\m^2}$から$\SI{269}{\m^2}$の範囲で規模の異なる5つのシューボックス型のコンサートホールにおける舞台音響を評価した。各ホールについて、測定位置に関する舞台前方または舞台中央の2条件と側面反射板の有無による2つのステージ条件からなる室内楽を想定した4つの音場条件が検討され、各音場条件について、音源と受音点の位置関係を舞台下手・上手方向または舞台前後方向とする2つの測定位置で測定が行われた。
+この研究では$\mathrm{ST2}$は評価せずに$\mathrm{ST1}$を$\mathrm{ST_{Early}}$として呼称が改められて$\mathrm{ST_{Late}}$とともに測定されたほか、比較的小さな舞台寸法を持つホールの壁面から提供される初期反射音のエネルギーを考慮できる$7$〜$\SI{100}{ms}$の積分窓を持つアーリー/ダイレクト・エネルギー比（ED100）も提案された。
+
+JeonとBarron\cite{jeon2005}は、舞台上の位置の違いによる$\mathrm{ST_{Early}}$の値の差異について検討するため、ソウルの扇形平面を持つ大規模なホールのステージ上（舞台面積$\SI{270}{\m^2}$、舞台の幅の平均値$\SI{22}{\m}$、天井の高さ$14$〜$\SI{15}{\m}$）の8つの位置で$\mathrm{ST_{Early}}$の測定を行った。この研究では、音源と受音点の高さとして$\SI{1.2}{\m}$が使用され、これはは演奏者の座位の高さと対応する。測定された$\mathrm{ST_{Early}}$はステージ後方の位置で最も高く、ステージ前方の位置で最も低くなり、その値はそれぞれ約$\SI{-15}{\dB}$、約$\SI{-24}{\dB}$であった。
+
+DammerudとBarron\cite{dammerud2007}は、イギリスの4つのホールのステージで測定と主観的調査を実施した。 舞台面積は$111$～$\SI{189}{\m}$、舞台の幅は$18.0$～$\SI{27.0}{\m}$、平均高さは$9.6$～$\SI{19.0}{\m}$の範囲であった。この研究では、実際の演奏条件を想定してステージ上に椅子が配置された状態にて$\mathrm{ST_{Early}}$および$\mathrm{ST_{Late}}$が測定された。
+
+上野\cite{Ueno2002}は、Gadeが$\mathrm{ST}$の測定において音源と受音点の距離および高さをともに$\SI{1.0}{\m}$としたことに根拠が見られないことを指摘し、演奏家と楽器との関係をモデル化した測定位置として、音源である無指向性スピーカーを楽器の高さを想定した$\SI{1.2}{\m}$、受音点である無指向性マイクを耳の高さを想定した$\SI{1.5}{\m}$とし、音源・受音点の水平面内での中心間距離を楽器と耳の距離を想定した$\SI{0.3}{\m}$の位置とした測定条件においてインパルス応答測定を行ってSTを求めた。その結果、Gadeの測定条件で得られる結果に対して、音源受音点間距離が近いことから、全般的に約7dB程度低い値が得られている。
+
+このように、ステージ音響指標STに関して様々な研究者によって検討がなされてきたが、その一方で測定方法が確立・統一されていないことから、異なる研究機関同士の測定結果を単純に比較して検討することは難しい。Giovannini\cite{giovannini2010}らは主要な楽器セクション間の音響条件の違いを検出することを目的とした測定を行う2008年に投稿した論文の中で、異なる研究者が実施した場合にも比較可能で再現性のある結果が得られるように定義した測定手順について紹介している。
+
+これらの成果はISO3382-1:2009\cite{ISO3382-1}の中にまとめられ、ステージ音響指標$\mathrm{ST_{Early}}$および$\mathrm{ST_{Late}}$が次の式の通りに規格化されている。
+
+\begin{equation}
+  \label{eq:STEarly}
+  \mathrm{ST_{Early}}= 10 \log_{10}
+  \frac{\int_{20 \: \mathrm{ms}}^{100 \: \mathrm{ms}} p^2(t) dt}
+  {\int_{0 \: \mathrm{ms}}^{10 \: \mathrm{ms}} \: p^2(t) \: dt}
+\end{equation}
+
+\begin{equation}
+  \label{eq:STLate}
+  \mathrm{ST_{Late}}= 10 \log_{10}
+  \frac{\int_{100 \: \mathrm{ms}}^{1000 \: \mathrm{ms}} p^2(t) dt}
+  {\int_{0 \: \mathrm{ms}}^{10 \: \mathrm{ms}} \: p^2(t) \: dt}
+\end{equation}
+%=======================================================================
+\newpage
+\section{方向別STの提案}
+第1章の第2節でも触れたように、反射音の到来方向も演奏者の感じる響きの印象に影響を与えうる物理的要因であることが中村ら\cite{中村1993}により指摘されており、本研究では方向特性が演奏者に与える影響に関して検討を行うことを目的としている。そこで、本研究ではISOに規格化されるSTをもとに方向特性を評価する指標を式(\ref{eq:方向別STEarly})および式(\ref{eq:方向別STLate})の通りに構築し、ホールステージの音場の特性の把握および実験室において生成される音場の評価に用いる。
+
+\begin{equation}
+  \label{eq:方向別STEarly}
+  \mathrm{ST_{Early,dir}}= 10 \log_{10}
+  \frac{\int_{20 \: \mathrm{ms}}^{100 \: \mathrm{ms}} p_{\mathrm{dir}}^2(t) dt}
+  {\int_{0 \: \mathrm{ms}}^{10 \: \mathrm{ms}} \: p^2(t) \: dt}
+\end{equation}\\
+\begin{equation}
+  \label{eq:方向別STLate}
+  \mathrm{ST_{Late,dir}}= 10 \log_{10}
+  \frac{\int_{100 \: \mathrm{ms}}^{1000 \: \mathrm{ms}} p_{\mathrm{dir}}^2(t) dt}
+  {\int_{0 \: \mathrm{ms}}^{10 \: \mathrm{ms}} \: p^2(t) \: dt}
+\end{equation}\\
+
+ここで、$p_{\mathrm{dir}}(t)$、$p_{\mathrm{dir}}(t)$はそれぞれ全指向性マイクで測定したインパルス応答とカージオイドマイクを用いて測定したインパルス応答を表し、添え字$\mathrm{dir}$は上下方向を U, D（Up, Down）、客席側・舞台奥側を F, B（Front, Back）、舞台上手・下手方向を L, R（Left, Right）と表記する。
+
+インパルス応答の測定方法はISO3382-1:2009に規格化される$\mathrm{ST_{Early}}$および$\mathrm{ST_{Late}}$にならうものとし、音源には全指向性のスピーカーを用い、また音源・受音点間の距離は音源を客席側として$\SI{1.0}{\m}$、音源・受音点の高さはともに$\SI{1.0}{\m}$または$\SI{1.5}{\m}$、壁面からの距離は$\SI{2.0}{\m}$以上離した条件でインパルス応答を測定する。測定条件の概略図を図\ref{fig:STのIR測定条件}に示す。
+
+また、分析対象の周波数帯域は$\SI{250}{\Hz}$から$\SI{2000}{\Hz}$の4帯域の1/1オクターブバンドとし、各周波数帯域で式(\ref{eq:方向別STEarly})および式(\ref{eq:方向別STLate})に従い計算したのちに算術平均をとり指標値とする。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=6.5cm,clip]{images/howToMeasureST.png}
+  \caption{STのインパルス応答測定条件の概略図}
+  \label{fig:STのIR測定条件}
+\end{figure}
+
+%=======================================================================
+\newpage
+\subsection*{アンビソニックマイクを用いた測定システム}
+本研究における受音系のマイクとして、図\ref{fig:アンビソニックマイク}に示す商用のアンビソニックマイク（Sennheiser Ambeo VR Mic）を用いた。アンビソニックマイクは4つのカージオイド特性のマイクを正四面体の頂点方向に配置したものであり、測定後の簡単な信号処理により、全指向性マイクで測定した信号および任意の方向にカージオイド特性のマイクを向けて測定した信号と等価な信号を得ることができる\cite{西村竜一2014}。本研究で用いたアンビソニックマイクの方向に関する定義を図\ref{fig:方向の定義}に示す。
+
+\begin{figure}[H]
+  \begin{minipage}[b]{.33\textwidth}
+      \centering
+      \includegraphics[width=.8\linewidth]{images/ambisonicMic.png}
+      \caption{アンビソニックマイク}
+      \label{fig:アンビソニックマイク}
+  \end{minipage}%
+  \begin{minipage}[b]{.66\textwidth}
+      \centering
+      \includegraphics[width=.8\linewidth]{images/ambisonicMicDirectionDef.png}
+      \caption{本研究における方向の定義}
+      \label{fig:方向の定義}
+  \end{minipage}
+\end{figure}
+
+方向別インパルス応答を得る手順は次の通りである。まず、Aフォーマットと呼ばれる正四面体の頂点方向の信号から式(\ref{ambisonicAtoB})により全指向性の信号と互いに直交する3つの双指向性の信号からなるBフォーマットと呼ばれる信号を得る。続いて、式(\ref{ambisonicBtoDir})によりBフォーマットの信号から直交6方向の方向別インパルス応答を計算する。
+
+ここで、$p_(t)$は全指向性マイクで測定したインパルス応答と等価な信号、$p_{\mathrm{FB}}(t)$、$p_{\mathrm{LR}}(t)$、$p_{\mathrm{UD}}(t)$は前後、左右、上下の双指向性マイクで収録したインパルス応答と等価な信号を表し、$p_{\mathrm{FLU}}$、$p_{\mathrm{FRD}}$、$p_{\mathrm{BLD}}$、$p_{\mathrm{BRU}}$はアンビソニックマイクのうち前方左上方（Front Left Up）、前方右下方（Front Right Down）、後方左下方（Back Left Down）、後方右上方（Back Right Up）の信号を表す。
+\begin{equation}
+  \label{ambisonicAtoB}
+  \begin{alignedat}{4}
+    p_(t) &= \frac{1}{2} (p_{\mathrm{FLU}} + p_{\mathrm{FRD}} + p_{\mathrm{BLD}} + p_{\mathrm{BRU}})
+    \\
+    p_{\mathrm{FB}}(t) &= \frac{\sqrt{3}}{2} (p_{\mathrm{FLU}} + p_{\mathrm{FRD}} - p_{\mathrm{BLD}} - p_{\mathrm{BRU}})
+    \\
+    p_{\mathrm{LR}}(t) &= \frac{\sqrt{3}}{2} (p_{\mathrm{FLU}} - p_{\mathrm{FRD}} + p_{\mathrm{BLD}} - p_{\mathrm{BRU}})
+    \\
+    p_{\mathrm{UD}}(t) &= \frac{\sqrt{3}}{2} (p_{\mathrm{FLU}} - p_{\mathrm{FRD}} - p_{\mathrm{BLD}} + p_{\mathrm{BRU}})
+    \\
+  \end{alignedat}
+\end{equation}
+\begin{equation}
+  \label{ambisonicBtoDir}
+  \begin{alignedat}{6}
+    p_{\mathrm{F}}(t) &= \frac{1}{2} (p(t) + p_{\mathrm{FB}}(t))
+    \\
+    p_{\mathrm{B}}(t) &= \frac{1}{2} (p(t) - p_{\mathrm{FB}}(t))
+    \\
+    p_{\mathrm{L}}(t) &= \frac{1}{2} (p(t) + p_{\mathrm{LR}}(t))
+    \\
+    p_{\mathrm{R}}(t) &= \frac{1}{2} (p(t) - p_{\mathrm{LR}}(t))
+    \\
+    p_{\mathrm{U}}(t) &= \frac{1}{2} (p(t) + p_{\mathrm{UD}}(t))
+    \\
+    p_{\mathrm{D}}(t) &= \frac{1}{2} (p(t) - p_{\mathrm{UD}}(t)) \\
+  \end{alignedat}
+\end{equation}
+%=======================================================================
+  \newpage
+  \section{反射音の評価区間に関する検討}
+    STの反射音の評価区間に関して、ISO3382-1では、式\ref{ST}における反射音の開始時刻$t_{1}$から
+    終了時刻$t_{2}$を、$\SI{20}{\ms}$から$\SI{100}{\ms}$としたものを初期反射音の評価に用いる
+    $\mathrm{ST_{Early}}$、$\SI{100}{\ms}$から$\SI{1000}{\ms}$としたものを後期反射音の評価に
+    用いる$\mathrm{ST_{Late}}$としている。
+    しかし、測定条件に関する規定では壁面からの距離を$\SI{2.0}{\m}$以上とすることとしているため、測定位置に
+    よっては直接音のエネルギーの評価区間の終了時刻である$\SI{10}{\ms}$以降でかつ初期反射音の評価区間の開始
+    時刻時刻である$\SI{20}{\ms}$以前に反射音が到来してしまう場合が考えられ、$\SI{10}{\ms}$から$\SI{20}{\ms}$
+    の間に到来する反射音の取り扱いについても聴感印象との対応関係を考慮して検討、決定する必要がある。
+   
+    本研究で用いるシステムを導入した半無響室におけるインパルス応答の測定位置を図\ref{fig:測定位置}に示し、システムをオフにした
+    ときと初期反射音成分を付加したときの測定したインパルス応答の時間波形を図\ref{fig:初期反射音付加の時間波形}に、エネルギー応答を
+    図\ref{fig:初期反射音付加のエネルギー応答}示す。
+    
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=.8\linewidth]{images/preStudy/timeWaveEarlyAdding.png}
+      \caption{初期反射音成分付加時のIRの時間波形}
+      \label{fig:初期反射音付加の時間波形}
+    \end{figure}
+
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=.8\linewidth]{images/preStudy/energyResponseEarlyAdded.png}
+      \caption{初期反射音成分付加時のエネルギー応答}
+      \label{fig:初期反射音付加のエネルギー応答}
+    \end{figure}
+    
+
+    AFCをオフにした際の測定結果から、半無響室の壁面は吸音材（グラスウール）で覆われているものの、$\SI{10}{\ms}$から
+    $\SI{20}{\ms}$の間に吸音され残った比較的大きなエネルギーを持つ反射音が到来していることがわかる。
+    
+    他方、AFCによる反射音の付加は、最も早く反射音成分の付加を行った場合でも、測定系および電気音響設備群の
+    配置による幾何学的条件とシステム内の信号処理のため、それぞれ$\SI{10}{\ms}$程度ずつの遅れ時間が生じ、
+    直接音に対して$\SI{20}{\ms}$程度遅れて到来している。
+
+    半無響室における聴感上の印象を考慮すると、AFCをオフにした際の反射音を知覚することは困難であり、初期反射音の
+    印象を支配的に決定づけるのはAFCによって付加された反射音成分であると考えられる。したがって、本研究において、
+    半無響室内で生成した音場を評価する際には、初期反射音の評価区間の開始時刻は$\SI{20}{\ms}$とするのが妥当で
+    あると考えられる。すなわち、本研究における方向別STは、初期反射音と後期反射音のそれぞれについて、式\ref{方向別STEarly}
+    および式\ref{方向別STLate}によって評価する。
+
+    \clearpage
+
+  %=====================================================================================
+  \section{方向別STの実測}
+
+    \subsection{ホールステージにおける実測による反射音到来方向特性の把握}
+    ホールステージにおける実測により、反射音の到来方向特性を把握する。規模およびステージ形式の様々な7つの
+    コンサートホールのステージの上手側半面に$\SI{2}{\m}$間隔のグリッドを設け、方向別STの測定を行った。
+    測定を行ったホールの写真を図\ref{fig:測定を行ったホール}に、測定した点の配置を図\ref{fig:測定点の配置}に示す。
+    ホールごとにステージの規模が異なり、測定点数はホールにより異なるが、図\ref{fig:測定点の配置}に濃く示した
+    点が各ホールでの測定が行えた測定点を表す。図中にはスピーカー位置を示しており、舞台後壁側にマイクが付置される。
+
+    また、測定を行ったホールの諸元を表\ref{table:測定を行ったホールの諸元}に示す。
+
+    \begin{table}[H]
+      \centering
+      \caption{測定を行ったホールの諸元}
+      \label{table:測定を行ったホールの諸元}
+      \begin{tabular}{cccccccc} \hline \hline
+        ホール &
+        \begin{tabular}{c}
+          座席数\\
+          (席)
+        \end{tabular}& 
+        \begin{tabular}{c}
+          $\mathrm{T_{30}}$(s) 500-\\
+          1kHz平均
+        \end{tabular}&
+        \begin{tabular}{c}
+          室容積\\
+          ($\mathrm{m^{3}}$)
+        \end{tabular}&
+        \begin{tabular}{c}
+          表面積\\
+          ($\mathrm{m^{2}}$) 
+        \end{tabular}&
+        \begin{tabular}{c}
+          舞台間口\\
+          (m)
+        \end{tabular}&
+        \begin{tabular}{c}
+          舞台奥行\\
+          (m)
+        \end{tabular}&
+        \begin{tabular}{c}
+          舞台高さ\\(m)
+        \end{tabular} \\ \hline
+        A & 421 & 1.3 & 4420 & 2070 & 16.5 & 10.5 & 8 \\
+        B & 500 & 1.4 & 5680 & 2740 & 15.5 & 9 & 7.4 \\
+        C & 698 & 2.5 & 11150 & 4600 & 12 & 16.2 & 13 \\
+        D & 1033 & 1.9 & 11940 & 4380 & 20 & 10 & 10 \\
+        E & 1104 & 1.6 & 10225 & 3435 & 19 & 9 & 8 \\
+        F & 1514 & 2.3 & 15580 & 5860 & 18.2 & 18.2 & 15 \\
+        G & 1884 & 2.2 & 18610 & 6445 & 20.8 & 11.7 & - \\ \hline \hline
+      \end{tabular}
+    \end{table}
+
+
+    \subsubsection{ホールによる違い}
+
+    ホールによる方向別STの特性を調べるため、すべてのホールで測定を行うことができた測定点であるS01、S02、S03、
+    S05、S06、S07、S09、S10での方向別STの平均値、標準偏差、最大値および最小値を各ホールについて求めた。
+    各ホールの$\mathrm{ST_{Early,dir}}$および$\mathrm{ST_{Late,dir}}$の測定結果を
+    \ref{fig:各ホールにおけるSTEarly}および図\ref{fig:各ホールにおけるSTLate}に示す。
+    それぞれのホールにおける各測定点の平均値を実線、1シグマ区間を色付きの領域、最大値・最小値を破線にて表す。
+
+    \begin{figure}[H]
+      \begin{minipage}[b]{.33\textwidth}
+          \centering
+          \includegraphics[width=1\linewidth]{images/realHallDirSt/early_hall_a_withLegend.png}
+          \subcaption*{ホールA}
+          \label{fig:ホールAにおけるSTEarly}
+      \end{minipage}%
+      \begin{minipage}[b]{.33\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/realHallDirSt/early_hall_b_allpoints.png}
+        \subcaption*{ホールB}
+        \label{fig:ホールBにおけるSTEarly}
+      \end{minipage}%
+      \begin{minipage}[b]{.33\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/realHallDirSt/early_hall_c_allpoints.png}
+        \subcaption*{ホールC}
+        \label{fig:ホールCにおけるSTEarly}
+      \end{minipage}
+
+      \begin{minipage}[b]{.33\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/realHallDirSt/early_hall_d_allpoints.png}
+        \subcaption*{ホールD}
+        \label{fig:ホールDにおけるSTEarly}
+      \end{minipage}%
+      \begin{minipage}[b]{.33\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/realHallDirSt/early_hall_e_allpoints.png}
+        \subcaption*{ホールE}
+        \label{fig:ホールEにおけるSTEarly}
+      \end{minipage}%
+      \begin{minipage}[b]{.33\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/realHallDirSt/early_hall_f_allpoints.png}
+        \subcaption*{ホールF}
+        \label{fig:ホールFにおけるSTEarly}
+      \end{minipage}
+
+      \begin{minipage}[b]{.33\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/realHallDirSt/early_hall_g_allpoints.png}
+        \subcaption*{ホールG}
+        \label{fig:ホールGにおけるSTEarly}
+      \end{minipage}
+
+    \caption{各ホールにおける$\mathrm{ST_{Early,dir}}$}
+    \label{fig:各ホールにおけるSTEarly}
+    \end{figure}
+
+
+    \begin{figure}[H]
+      \begin{minipage}[b]{.33\textwidth}
+          \centering
+          \includegraphics[width=1\linewidth]{images/realHallDirSt/late_hall_a_withLegend.png}
+          \subcaption*{ホールA}
+          \label{fig:ホールAにおけるSTlate}
+      \end{minipage}%
+      \begin{minipage}[b]{.33\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/realHallDirSt/late_hall_b_allpoints.png}
+        \subcaption*{ホールB}
+        \label{fig:ホールBにおけるSTlate}
+      \end{minipage}%
+      \begin{minipage}[b]{.33\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/realHallDirSt/late_hall_c_allpoints.png}
+        \subcaption*{ホールC}
+        \label{fig:ホールCにおけるSTlate}
+      \end{minipage}
+
+      \begin{minipage}[b]{.33\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/realHallDirSt/late_hall_d_allpoints.png}
+        \subcaption*{ホールD}
+        \label{fig:ホールDにおけるSTlate}
+      \end{minipage}%
+      \begin{minipage}[b]{.33\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/realHallDirSt/late_hall_e_allpoints.png}
+        \subcaption*{ホールE}
+        \label{fig:ホールEにおけるSTlate}
+      \end{minipage}%
+      \begin{minipage}[b]{.33\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/realHallDirSt/late_hall_f_allpoints.png}
+        \subcaption*{ホールF}
+        \label{fig:ホールFにおけるSTlate}
+      \end{minipage}
+
+      \begin{minipage}[b]{.33\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/realHallDirSt/late_hall_g_allpoints.png}
+        \subcaption*{ホールG}
+        \label{fig:ホールGにおけるSTlate}
+      \end{minipage}
+
+    \caption{各ホールにおける$\mathrm{ST_{Late,dir}}$}
+    \label{fig:各ホールにおけるSTLate}
+    \end{figure}
+
+
+
+    \subsubsection{舞台上の測定点による違い}
+
+    各測定点における方向別STの特性を調べるため、S01、S02、S03、S05、S06、S07、S09、S10のそれぞれの点について、
+    全ホールの方向別STの平均値、標準偏差、最大値および最小値を求めた。各測定点の$\mathrm{ST_{Early,dir}}$および
+    $\mathrm{ST_{Late,dir}}$の測定結果を図\ref{fig:各測定点におけるSTEarly}および図\ref{fig:各測定点におけるSTLate}に示す。
+    図中の実線が各測定点における全ホール分の平均値、網掛けの領域が1シグマ区間、破線が最大値・最小値を表す。
+
+    \begin{figure}[H]
+      \begin{minipage}[b]{.33\textwidth}
+          \centering
+          \includegraphics[width=1\linewidth]{images/realHallDirSt/early_S03_allhall.png}
+          \subcaption*{測定点3}
+          \label{fig:S03early}
+      \end{minipage}%
+      \begin{minipage}[b]{.33\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/realHallDirSt/early_S02_allhall.png}
+        \subcaption*{測定点2}
+        \label{fig:S02early}
+      \end{minipage}%
+      \begin{minipage}[b]{.33\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/realHallDirSt/early_S01_withLegend.png}
+        \subcaption*{測定点1}
+        \label{fig:S01early}
+      \end{minipage}
+
+      \begin{minipage}[b]{.33\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/realHallDirSt/early_S07_allhall.png}
+        \subcaption*{測定点7}
+        \label{fig:S07early}
+      \end{minipage}%
+      \begin{minipage}[b]{.33\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/realHallDirSt/early_S06_allhall.png}
+        \subcaption*{測定点6}
+        \label{fig:S06early}
+      \end{minipage}%
+      \begin{minipage}[b]{.33\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/realHallDirSt/early_S05_allhall.png}
+        \subcaption*{測定点5}
+        \label{fig:S04early}
+      \end{minipage}
+
+      \begin{minipage}[b]{.33\textwidth}
+        \hspace{1 \linewidth}
+      \end{minipage}%
+      \begin{minipage}[b]{.33\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/realHallDirSt/early_S10_allhall.png}
+        \subcaption*{測定点10}
+        \label{fig:S10early}
+      \end{minipage}%
+      \begin{minipage}[b]{.33\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/realHallDirSt/early_S09_allhall.png}
+        \subcaption*{測定点9}
+        \label{fig:S09early}
+      \end{minipage}
+
+    \caption{各測定点における$\mathrm{ST_{Early,dir}}$（全ホール）}
+    \label{fig:各測定点におけるSTEarly}
+    \end{figure}
+
+
+    \begin{figure}[H]
+      \begin{minipage}[b]{.33\textwidth}
+          \centering
+          \includegraphics[width=1\linewidth]{images/realHallDirSt/late_S03_allhall.png}
+          \subcaption*{測定点3}
+          \label{fig:S03late}
+      \end{minipage}%
+      \begin{minipage}[b]{.33\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/realHallDirSt/late_S02_allhall.png}
+        \subcaption*{測定点2}
+        \label{fig:S02late}
+      \end{minipage}%
+      \begin{minipage}[b]{.33\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/realHallDirSt/late_S01_withLegend.png}
+        \subcaption*{測定点1}
+        \label{fig:S01late}
+      \end{minipage}
+
+      \begin{minipage}[b]{.33\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/realHallDirSt/late_S07_allhall.png}
+        \subcaption*{測定点7}
+        \label{fig:S07late}
+      \end{minipage}%
+      \begin{minipage}[b]{.33\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/realHallDirSt/late_S06_allhall.png}
+        \subcaption*{測定点6}
+        \label{fig:S06late}
+      \end{minipage}%
+      \begin{minipage}[b]{.33\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/realHallDirSt/late_S05_allhall.png}
+        \subcaption*{測定点5}
+        \label{fig:S04late}
+      \end{minipage}
+
+      \begin{minipage}[b]{.33\textwidth}
+        \hspace{1 \linewidth}
+      \end{minipage}%
+      \begin{minipage}[b]{.33\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/realHallDirSt/late_S10_allhall.png}
+        \subcaption*{測定点10}
+        \label{fig:S10late}
+      \end{minipage}%
+      \begin{minipage}[b]{.33\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/realHallDirSt/late_S09_allhall.png}
+        \subcaption*{測定点9}
+        \label{fig:S09late}
+      \end{minipage}
+
+    \caption{各測定点における$\mathrm{ST_{Late,dir}}$（全ホール）}
+    \label{fig:各測定点におけるSTLate}
+    \end{figure}
+
+
+    %=====================================================================================
+    \subsection{実験室における可変幅の検討}
+    実験室に響きを付加するにあたり、実験室で実現可能な響きの幅、すなわち最小の響きの条件と最大の響きの
+    条件を検討する必要がある。
+
+    AFCは響きを増幅するシステムであるため、実験室で実現可能な最小の響きは、AFCをオフにしたときの響きとなる。
+    AFCをオフししたときの$\mathrm{ST_{Early,dir}}$、$\mathrm{ST_{Late,dir}}$を
+    表\ref{table:響き小の方向別ST}に示す。
+
+    \begin{table}[H]
+      \centering
+      \caption{AFCをオフにしたときの$\mathrm{ST_{Early,dir}}$、$\mathrm{ST_{Late,dir}}$}
+      \label{table:響き小の方向別ST}
+      \begin{tabular}{c|cccccc} \hline \hline
+        \begin{tabular}{c}
+        
+        \end{tabular}&
+        \begin{tabular}{c}
+          Front
+        \end{tabular}&
+        \begin{tabular}{c}
+          Back
+        \end{tabular}&
+        \begin{tabular}{c}
+          Left
+        \end{tabular}&
+        \begin{tabular}{c}
+          Right
+        \end{tabular}&
+        \begin{tabular}{c}
+          Up
+        \end{tabular}&
+        \begin{tabular}{c}
+          Down
+        \end{tabular} \\ \hline
+        $\mathrm{ST_{Early,dir}}$ (dB) & -24.2 & -25.5 & -24.2 & -25.9 &-25.9 & -23.3 \\
+        $\mathrm{ST_{Late,dir}}$ (dB) & -65.5 & -66.7 & -67.0 &-65.6 & -66.6 & -64.2 \\ \hline \hline
+      \end{tabular}
+    \end{table}
+
+    響きを増やすことに関してはある程度自由度を持って調整することができるが、AFCでつける響きを大きくしていく、
+    つまり再生音の音量を上げていくと、ある音量を超えたときに不自然な音色の変化（カラレーション）が発生し始める。
+    カラレーションが起こり始める音量の条件はイコライザの設定等様々な要素によって変化するため最大の響きを厳密に
+    調べることは困難である。
+    
+    実験室での可変幅の大まかな検討のため、イコライザによる周波数特性の手動調整を行わずに仮の設定でAFCをオンにし、
+    カラレーションの生じ始めを聴感的に確認し、その直前の音量の設定における$\mathrm{ST_{Early,dir}}$および
+    $\mathrm{ST_{Late,dir}}$を測定した。その結果を表\ref{table:響き大の方向別ST}に示す。
+
+    \begin{table}[H]
+      \centering
+      \caption{AFC仮調整時の$\mathrm{ST_{Early,dir}}$、$\mathrm{ST_{Late,dir}}$}
+      \label{table:響き大の方向別ST}
+      \begin{tabular}{c|cccccc} \hline \hline
+        \begin{tabular}{c}
+        
+        \end{tabular}&
+        \begin{tabular}{c}
+          Front
+        \end{tabular}&
+        \begin{tabular}{c}
+          Back
+        \end{tabular}&
+        \begin{tabular}{c}
+          Left
+        \end{tabular}&
+        \begin{tabular}{c}
+          Right
+        \end{tabular}&
+        \begin{tabular}{c}
+          Up
+        \end{tabular}&
+        \begin{tabular}{c}
+          Down
+        \end{tabular} \\ \hline
+        $\mathrm{ST_{Early,dir}}$ (dB) & -16.4 & -18.0 & -16.7 & -17.3 & -19.9 & -16.1\\
+        $\mathrm{ST_{Late,dir}}$ (dB) & -15.8 & -15.9 & -16.0 & -15.8 & -19.2 & -15.0\\ \hline \hline
+      \end{tabular}
+    \end{table}
+
+    
+
+    これらの結果とコンサートホールでの実測値から、実験室における$\mathrm{ST_{Early,dir}}$と
+    $\mathrm{ST_{Late,dir}}$はコンサートホールでの実測値と同程度の値を十分取ることができると考えられ、
+    詳細な設定により所望の音場を実現しうることが期待できる。
+
+    
+
+  %=====================================================================================
+  % ホールA
+
+  \newpage
+    
+  \begin{figure}[H]
+    \begin{minipage}{.5\linewidth} % 右側の図
+      \centering
+      \includegraphics[width=.7\linewidth]{images/measuredHalls/resized/picture_a.jpg}
+      \\ホールA 外観
+    \end{minipage}%
+    \begin{minipage}{.5\linewidth} % 右側の図
+      \centering
+      \includegraphics[width=.7\linewidth]{images/measuredHalls/resized/flat_a.jpg}
+      \\ホールA 測定点の配置
+    \end{minipage}
+
+    \begin{minipage}{1\linewidth}
+      \centering
+      ホールA 諸元\\
+      \includegraphics[width=.8\linewidth]{images/measuredHalls/informationTable/a.pdf}
+    \end{minipage}
+  \end{figure}
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[scale=.75]{images/realHallDirSt/allPoint/reshaped/a.pdf}
+    \caption*{ホールA 方向別ST}
+  \end{figure}
+
+  %=====================================================================================
+  % ホールB
+  \newpage
+
+  \begin{figure}[H]
+    \begin{minipage}{.5\linewidth} % 右側の図
+      \centering
+      \includegraphics[width=.7\linewidth]{images/measuredHalls/resized/picture_b.jpg}
+      \\ホールB 外観
+    \end{minipage}%
+    \begin{minipage}{.5\linewidth} % 右側の図
+      \centering
+      \includegraphics[width=.7\linewidth]{images/measuredHalls/resized/flat_b.jpg}
+      \\ホールB 測定点の配置
+    \end{minipage}
+
+    \begin{minipage}{1\linewidth}
+      \centering
+      ホールB 諸元\\
+      \includegraphics[width=.8\linewidth]{images/measuredHalls/informationTable/b.pdf}
+    \end{minipage}
+  \end{figure}
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[scale=.75]{images/realHallDirSt/allPoint/reshaped/b.pdf}
+    \caption*{ホールB 方向別ST}
+  \end{figure}
+
+  %=====================================================================================
+  % ホールC
+  \newpage
+
+  \vspace*{6\baselineskip}
+
+  \begin{figure}[H]
+    \begin{minipage}{.5\linewidth}
+      \centering
+      \includegraphics[width=.7\linewidth]{images/measuredHalls/resized/picture_c.jpg}
+      \caption*{ホールC 外観}  
+    \end{minipage}%
+    \begin{minipage}{.5\linewidth}
+      \centering
+      \includegraphics[width=.7\linewidth]{images/measuredHalls/resized/flat_c.jpg}
+      \caption*{ホールC 測定点の配置}
+    \end{minipage}
+  \end{figure}
+
+  \vspace{2\baselineskip}
+
+  \begin{table}[H]
+    \centering
+    \caption*{ホールC 諸元}
+    \includegraphics[width=.8\linewidth]{images/measuredHalls/informationTable/c_wide.pdf}
+  \end{table}
+
+  \newpage
+  \begin{figure}[H]
+    \centering
+    \includegraphics[scale=.75]{images/realHallDirSt/allPoint/reshaped/c.pdf}
+    \caption*{ホールC 方向別ST}
+  \end{figure}
+
+  %=====================================================================================
+  % ホールD
+  \newpage
+
+  \begin{figure}[H]
+    \begin{minipage}{.5\linewidth} % 右側の図
+      \centering
+      \includegraphics[width=.7\linewidth]{images/measuredHalls/resized/picture_d.jpg}
+      \\ホールD 外観
+    \end{minipage}%
+    \begin{minipage}{.5\linewidth} % 右側の図
+      \centering
+      \includegraphics[width=.7\linewidth]{images/measuredHalls/resized/flat_d.jpg}
+      \\ホールD 測定点の配置
+    \end{minipage}
+
+    \begin{minipage}{1\linewidth}
+      \centering
+      ホールD 諸元\\
+      \includegraphics[width=.8\linewidth]{images/measuredHalls/informationTable/d.pdf}
+    \end{minipage}
+  \end{figure}
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[scale=.77]{images/realHallDirSt/allPoint/reshaped/d.pdf}
+    \caption*{ホールD 方向別ST}
+  \end{figure}
+
+  %=====================================================================================
+  % ホールE
+  \newpage
+
+  \begin{figure}[H]
+    \begin{minipage}{.5\linewidth} % 右側の図
+      \centering
+      \includegraphics[width=.7\linewidth]{images/measuredHalls/resized/picture_e.jpg}
+      \\ホールE 外観
+    \end{minipage}%
+    \begin{minipage}{.5\linewidth} % 右側の図
+      \centering
+      \includegraphics[width=.7\linewidth]{images/measuredHalls/resized/flat_e.jpg}
+      \\ホールE 測定点の配置
+    \end{minipage}
+
+    \begin{minipage}{1\linewidth}
+      \centering
+      ホールE 諸元\\
+      \includegraphics[width=.8\linewidth]{images/measuredHalls/informationTable/e.pdf}
+    \end{minipage}
+  \end{figure}
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[scale=.77]{images/realHallDirSt/allPoint/reshaped/e.pdf}
+    \caption*{ホールE 方向別ST}
+  \end{figure}
+
+  %=====================================================================================
+  \newpage
+
+  \vspace{4\baselineskip}
+  
+  \begin{figure}[H]
+    \begin{minipage}{0.5\textwidth} % 左側の図
+      \centering
+      \includegraphics[width=.8\linewidth]{images/measuredHalls/resized/picture_f.jpg}
+      \\ホールF 外観
+      \vspace{2\baselineskip}
+
+      ホールF 諸元\\
+      \includegraphics[width=.8\linewidth]{images/measuredHalls/informationTable/f.pdf}
+      \vspace{2\baselineskip}
+
+      \includegraphics[width=.8\linewidth]{images/measuredHalls/resized/flat_f.jpg}
+      \\ホールF 測定した点の配置を図
+    \end{minipage}%
+    \begin{minipage}{.5\linewidth} % 右側の図
+        \raggedleft
+        \includegraphics[scale=.77]{images/realHallDirSt/allPoint/reshaped/fLeftPage.pdf}
+    \end{minipage}
+\end{figure}
+
+\newpage
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=.77]{images/realHallDirSt/allPoint/reshaped/fRightPage.pdf}
+  \caption*{ホールF 方向別ST}
+\end{figure}
+
+  %=====================================================================================
+  
+  \newpage
+  
+  \vspace{4\baselineskip}
+
+  \begin{figure}[H]
+    \begin{minipage}{0.5\textwidth} % 左側の図
+      \centering
+
+      \includegraphics[width=.8\linewidth]{images/measuredHalls/resized/picture_g.jpg}
+      \\ホールG 外観
+      \vspace{2\baselineskip}
+
+      ホールG 諸元\\
+      \includegraphics[width=.8\linewidth]{images/measuredHalls/informationTable/g.pdf}
+      \vspace{2\baselineskip}
+
+      \includegraphics[width=.8\linewidth]{images/measuredHalls/resized/flat_g.jpg}
+      \\ホールG 測定点の配置
+    \end{minipage}%
+    \begin{minipage}{.5\linewidth} % 右側の図
+        \raggedleft
+        \includegraphics[scale=.77]{images/realHallDirSt/allPoint/reshaped/gLeftPage.pdf}
+    \end{minipage}
+\end{figure}
+
+\newpage
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=.77]{images/realHallDirSt/allPoint/reshaped/gRightPage.pdf}
+  \caption*{ホールG 方向別ST}
+\end{figure}
+
+
+\clearpage
+
+
+% 参考文献
+\input{bibmute_inline.tex}
+
+\end{document}

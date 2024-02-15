@@ -1,0 +1,12 @@
+% 参考文献の箇所にインプットしてください。
+
+% 分割ファイル内でのみ，bibliographyを読み込みます。
+
+\expandafter\ifx\csname ifdraft\endcsname\relax
+
+  % bibliographyを展開する
+
+  \bibliographystyle{junsrt}
+  \bibliography{ref.bib}% 同じディレクトリ内のbibファイルのみを参照可能
+
+\fi

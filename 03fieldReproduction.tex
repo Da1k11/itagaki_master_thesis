@@ -1,0 +1,377 @@
+\documentclass[11pt,a4j]{jreport}
+\input{preamble.tex}
+
+\begin{document}
+
+\chapter{実験音場の生成}
+
+第3章で測定した方向別をもとに、第2章で導入した音場生成システムAFCを用いて実験音場を生成する。
+本章では、まず音場生成時の目標とする音場の特性について述べ、続いて生成する音場での方向別STおよび周波数特性の調整を
+含む残響時間とSTの設定方法について説明する。さらに、コンサートホールを模して生成した音場を基準音場として基準音場の
+音響特性と、基準音場から方向特性を変化させた音場の音響特性を測定した結果について示す。
+
+%=====================================================================================
+
+  \section{生成する基準音場の目標値}
+    第3章における実際のコンサートホールでの測定結果について、標準的な演奏位置である舞台中央・前方側の4点（S01・S02・S05・S06）における
+    全ホールの$\mathrm{ST_{Early,dir}}$および$\mathrm{ST_{Late,dir}}$は図\ref{fig:舞台中央・前方側4点の方向別ST}
+    に示す通りである。実線が測定値の平均、色付きの領域が測定値の標準偏差を平均値に加算またはまたは減算した区間（1シグマ区間）を表す。
+
+    \begin{figure}[H]
+      \begin{minipage}
+        [b]{.5\linewidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/targetFieldEarlywithLegend.png}
+        \subcaption*{$\mathrm{ST_{Early,dir}}$}
+      \end{minipage}%
+      \begin{minipage}
+        [b]{.5\linewidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/targetFieldLatewithLegend.png}
+        \subcaption*{$\mathrm{ST_{Late,dir}}$}
+      \end{minipage}
+    \centering
+    \label{fig:舞台中央・前方側4点の方向別ST}
+    \caption{舞台中央・前方側4点の方向別ST}
+    \end{figure}
+
+    この結果は第3章において検討した実験室における音場の可変幅の中で生成しうると期待できるため、基準音場として生成する音場は
+    この全ホールの舞台前方中央付近での測定点の実測値の平均値から±1シグマ区間の間を目標値として設定する。
+    
+
+%=====================================================================================
+
+  \section{生成音場の調整方法}
+    
+    \subsection{方向別STの調整方法}
+    実測した方向別STの値をもとに、生成する音場の方向別STを調整する。$\mathrm{ST_{Early,dir}}$は後方が大きく、
+    $\mathrm{ST_{Late,dir}}$は全方向から満遍なく反射音が到来していることがわかるため、このような方向特性を
+    実現することができるようにマイクとスピーカーの配置と結線を行った。実験室のシステム機器配置を
+    図\ref{fig:実験室におけるAFCのシステム機器配置}に、これらのルーティングを表\ref{tab:マイクとスピーカーのルーティング}に示す。
+
+
+    \begin{table}[H]
+      \centering
+      \caption{マイクとスピーカーのルーティング}
+      \label{tab:マイクとスピーカーのルーティング}
+
+      \begin{tabular}[H]{|c||cccc|cccc|cccc|cccc|cccc|}
+        \hline
+        system &
+        \multicolumn{4}{c|}{
+          \begin{tabular}{c}
+            1 EMRなし\\
+            初期反射音
+          \end{tabular}
+        }& 
+        \multicolumn{4}{c|}{
+          \begin{tabular}{c}
+            2 EMRあり\\
+            後期反射音
+          \end{tabular}
+        }&
+        \multicolumn{4}{c|}{
+          \begin{tabular}{c}
+            3 EMRあり\\
+            後期反射音
+          \end{tabular}}&
+        \multicolumn{4}{c|}{
+          \begin{tabular}{c}
+            4 EMRなし\\
+            初期反射音
+          \end{tabular}
+        }& 
+        \multicolumn{4}{c|}{
+          \begin{tabular}{c}
+            5 EMRなし\\
+            後期反射音
+          \end{tabular}
+        } \\ \hline
+        mic  & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 5 & 6 & 7 & 8 & 5 & 6 & 7 & 8 & 5 & 6 & 7 & 8 \\ \hline \hline
+        Sp.1 &  &  &  &  &    &  &  & x&   &  &  &  &   &  &  &  &   &  &  & \\ 
+        Sp.2 &  &  &  &  &    &  &  &  &   &  &  &  &   &  &  &  &   &  &  & \\
+        Sp.3 &  &  &  &  &    & x&  &  &   &  &  &  &   &  &  &  &   &  &  & \\
+        Sp.4 &  & o&  &  &    &  &  &  &   &  &  &  &   &  &  &  &   &  &  & \\
+        Sp.5 &  &  &  &  &   x&  &  &  &   &  &  &  &   &  &  &  &   &  &  & \\
+        Sp.6 &  &  &  &  &    &  &  &  &   &  &  &  &   &  &  &  &   &  &  & \\
+        Sp.7 &  &  &  &  &    &  & x&  &   &  &  &  &   &  &  &  &   &  &  & \\
+        Sp.8 &  &  & o&  &    &  &  &  &   &  &  &  &   &  &  &  &   &  &  & \\ \hline
+        Sp.9 &  &  &  &  &    &  &  & x&   &  &  &  &   &  &  &  &   &  &  & \\
+        Sp.10 & &  &  & o&    &  &  &  &   &  &  &  &   &  &  &  &   & o&  & \\
+        Sp.11 & &  & o&  &    &  &  &  &   &  &  &  &   &  &  & o&   &  &  & \\
+        Sp.12 & &  &  &  &    &  &  &  &   &  &  &  &   & o&  &  &  o&  &  & \\
+        Sp.13 & & o&  &  &   x& x&  &  &   &  &  &  &  o&  &  &  &   &  &  & \\
+        Sp.14 & o& &  &  &    &  &  &  &   &  &  &  &   &  &  &  &   &  & o& \\
+        Sp.15 & &  &  &  &    &  & x&  &   &  &  &  &   &  &  &  &   &  &  & o\\
+        Sp.16 & &  &  &  &    &  &  &  &   &  &  &  &   &  & o&  &   &  &  & \\ \hline
+        Sp.17 & &  &  &  &    &  &  &  &   x& &  &  &   &  &  &  &   &  &  & \\
+        Sp.18 & &  &  & o&    &  &  &  &   & x&  &  &   &  &  &  &   &  &  & \\
+        Sp.19 &o&  &  &  &    &  &  &  &   &  & x&  &   &  &  &  &   &  &  & \\
+        Sp.20 & &  &  &  &    &  &  &  &   &  &  & x&   &  &  &  &   &  &  & \\ \hline
+        
+      \end{tabular}
+    \end{table}
+
+    \begin{figure}[H]
+      \begin{minipage}[b]{1\linewidth}
+          \centering
+          \includegraphics[width=.6\linewidth]{images/afcEquipArrayVertical.png}
+          \subcaption{断面図}
+          \label{fig:AFC機器配置断面図}
+      \end{minipage}
+  
+      \begin{minipage}[b]{0.5\linewidth}
+          \centering
+          \includegraphics[width=.9\linewidth]{images/afcEquipArrayMic.png}
+          \subcaption{マイクロホン配置}
+          \label{fig:マイクロホン配置}
+      \end{minipage}%
+      \begin{minipage}[b]{0.5\linewidth}
+        \centering
+        \includegraphics[width=.9\linewidth]{images/afcEquipArraySp3.png}
+        \subcaption{スピーカー配置 三層目}
+        \label{fig:スピーカー配置 三層目}
+        \vfill
+      \end{minipage}
+  
+      \begin{minipage}[b]{0.5\linewidth}
+          \centering
+          \includegraphics[width=.9\linewidth]{images/afcEquipArraySp2.png}
+          \subcaption{スピーカー配置 二層目}
+          \label{fig:スピーカー配置 二層目}
+      \end{minipage}%
+      \begin{minipage}[b]{0.5\linewidth}
+        \centering
+        \includegraphics[width=.9\linewidth]{images/afcEquipArraySp1.png}
+        \subcaption{スピーカー配置 一層目}
+        \label{fig:スピーカー配置 一層目}
+        \vfill
+      \end{minipage}
+      \caption{実験室におけるAFCのシステム機器配置}
+      \label{fig:実験室におけるAFCのシステム機器配置}
+  \end{figure}
+
+    また、響きの可変幅を十分に確保できるよう、重畳するFIRフィルタには図\ref{fig:FIRフィルタを測定したコンサートホール}に
+    示す2000席程度の豊かな響きを持つコンサートホールにて実測したインパルス応答を用いた。初期反射音制御部には舞台付近で
+    測定したインパルス応答を、後期反射音制御部には舞台から遠方にて測定したインパルス応答を用いた。それぞれについて、ともに
+    異なる4点で測定したインパルス応答を用いており、これは完全に同じインパルス応答を用いることによってAFCシステム内の
+    ループごとの周波数特性が近くなることでカラレーションに対する安定性が低下するのを防ぐことを目的としている。
+    重畳に用いたインパルス応答の時間波形を図\ref{fig:初期反射音の重畳に用いたFIRフィルタ}および
+    図\ref{fig:後期反射音の重畳に用いたフィルタ}に示す。
+
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=.6\linewidth]{images/convolutedIrHall.jpg}
+      \caption{FIRフィルタを測定したコンサートホール}
+      \label{fig:FIRフィルタを測定したコンサートホール}
+    \end{figure}
+
+    \begin{figure}[H]
+      \begin{minipage}[b]{.5\linewidth}
+          \centering
+          \includegraphics[width=.9\linewidth]{images/convolutedIr/ER1.png}
+          \subcaption*{FIRフィルタ 1}
+      \end{minipage}%
+      \begin{minipage}[b]{.5\linewidth}
+          \centering
+          \includegraphics[width=.9\linewidth]{images/convolutedIr/ER2.png}
+          \subcaption*{FIRフィルタ 2}
+      \end{minipage}
+
+      \begin{minipage}[b]{.5\linewidth}
+          \centering
+          \includegraphics[width=.9\linewidth]{images/convolutedIr/ER3.png}
+          \subcaption*{FIRフィルタ 3}
+      \end{minipage}%
+      \begin{minipage}[b]{.5\linewidth}
+          \centering
+          \includegraphics[width=.9\linewidth]{images/convolutedIr/ER4.png}
+          \subcaption*{FIRフィルタ 4}
+      \end{minipage}
+
+      \centering
+      \caption{初期反射音の重畳に用いたFIRフィルタ}
+      \label{fig:初期反射音の重畳に用いたFIRフィルタ}
+    \end{figure}
+
+    \begin{figure}[H]
+      \begin{minipage}[b]{.5\linewidth}
+          \centering
+          \includegraphics[width=.9\linewidth]{images/convolutedIr/REV1.png}
+          \subcaption*{FIRフィルタ 1}
+      \end{minipage}%
+      \begin{minipage}[b]{.5\linewidth}
+          \centering
+          \includegraphics[width=.9\linewidth]{images/convolutedIr/REV2.png}
+          \subcaption*{FIRフィルタ 2}
+      \end{minipage}
+
+      \begin{minipage}[b]{.5\linewidth}
+          \centering
+          \includegraphics[width=.9\linewidth]{images/convolutedIr/REV3.png}
+          \subcaption*{FIRフィルタ 3}
+      \end{minipage}%
+      \begin{minipage}[b]{.5\linewidth}
+          \centering
+          \includegraphics[width=.9\linewidth]{images/convolutedIr/REV4.png}
+          \subcaption*{FIRフィルタ 4}
+      \end{minipage}
+
+      \centering
+      \caption{後期反射音の重畳に用いたFIRフィルタ}
+      \label{fig:後期反射音の重畳に用いたフィルタ}
+    \end{figure}
+
+    $\mathrm{ST_{Early,dir}}$および$\mathrm{ST_{Late,dir}}$を目標値に近づけて制御するためには、初期反射音と
+    後期反射音の成分をある程度独立に制御することが必要となる。初期反射音制御部のために付加したエネルギーが後期反射音の
+    評価区間に漏れ出す量を少なくするため、初期反射音制御部では重畳するFIRフィルタにフェードアウトを設定することにより
+    信号長を$\SI{120}{ms}$に限定した。
+    
+    また、後期反射音制御部では、反射音の付加に長い遅れ時間を加えることで$\mathrm{ST_{Early,dir}}$の評価区間に入るエネルギーを
+    減らすことができるが、遅れ時間が大きすぎるとエコー障害が生じる恐れがある。本研究では、$\SI{45}{ms}$の遅れ時間を
+    付け加えることにより、聴感的な自然さを保ちつつ$\mathrm{ST_{Early,dir}}$への影響を低減した。
+
+    \subsection{その他の音響特性の調整方法}
+      \subsubsection{残響時間の調整}
+      本実験で用いた実験室における音響測定では、部屋の広さによる制約により、直接音の減衰が大きいため残響時間の評価として
+      よく用いられる $\mathrm{T_{20}}$ または $\mathrm{T_{30}}$ を適切に測定することができない。
+      そこで本研究では、$\mathrm{ST}$の測定条件によるインパルス応答の測定結果からエネルギーの減衰曲線を描き、
+      $\SI{-15}{dB}$から$\SI{-45}{dB}$までの減衰曲線の傾きを読むことにより残響時間を求めた。
+      生成した音場の残響時間は通常よくあるコンサートホールでの残響時間よりもかなり長くなる傾向があったため、
+      後期反射音制御部で重畳するFIRフィルタにフェードアウトを設定することで残響時間を短くし、$\SI{1.8}{秒}$程度
+      の自然な長さになるよう調整した。
+      
+      \subsubsection{周波数特性の調整}
+      オクターブバンドごとのSTおよび残響時間の値が極端にばらつくことを防ぐため、測定とAFCシステム内部の
+      イコライザの調整を繰り返して周波数特性を調整した。
+
+%=====================================================================================
+
+\section{生成した音場の特性}
+
+  \subsection{基準音場}
+  コンサートホールのステージを模して生成した基準音場の方向別STを図\ref{fig:基準音場の方向別ST}に示す。
+  各方向での目標値からの差はすべて$\SI{1}{dB}$未満であり、およそ目標値の通りの方向別STを実現することが
+  できた。
+  
+  残響時間およびSTを図\ref{fig:基準音場の残響時間とST}に示す。残響時間および$\mathrm{ST_{Late,dir}}$は
+  すべてのオクターブバンドでほぼフラットな周波数特性となった。$\mathrm{ST_{Early,dir}}$は室自体の持つ特性
+  が影響していると考えられ、完全な制御はできていないが、平均値からの偏差はすべてのオクターブバンドで$\SI{1}{dB}$
+  程度に収めることができた。
+  
+  減衰曲線を図\ref{fig:基準音場の減衰曲線}に示す。AFCで生成した音場では、エネルギーの付加によって特に響きの
+  後期反射音側で減衰曲線が盛り上がる場合があるが、今回生成した音場ではこのような現象は見られず、実際の空間と
+  同様の直線的な減衰が確認できた。
+
+  \begin{figure}[H]
+    \begin{minipage}
+      [b]{.5\linewidth}
+      \centering
+      \includegraphics[width=1\linewidth]{images/experimentField/withLegend/baseEarlyOnTarget4.png}
+      \subcaption*{$\mathrm{ST_{Early,dir}}$}
+    \end{minipage}%
+    \begin{minipage}
+      [b]{.5\linewidth}
+      \centering
+      \includegraphics[width=1\linewidth]{images/experimentField/withLegend/baseLateOnTarget4.png}
+      \subcaption*{$\mathrm{ST_{Late,dir}}$}
+      \end{minipage}
+    \caption{基準音場の方向別ST}
+    \label{fig:基準音場の方向別ST}
+  \end{figure}
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\linewidth]{images/fieldO_stRt.png}
+    \caption{基準音場の残響時間とST}
+    \label{fig:基準音場の残響時間とST}
+  \end{figure}
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\linewidth]{images/fieldO_EnergyDecayCurve.png}
+    \caption{基準音場の減衰曲線}
+    \label{fig:基準音場の減衰曲線}
+  \end{figure}
+
+  %=====================================================================================
+
+  \subsection{方向の偏りをつけた音場}
+  基準音場に対して、初期反射音・後期反射音のそれぞれについて、前方からの反射を強めた音場と後方からの反射を
+  強めた音場を生成した。初期反射音の前方を強めた音場を音場A、初期反射音の後方を強めた音場を音場B、後期反射音の
+  前方を強めた音場を音場C、後期反射音の後方を強めた音場を音場Dとする。生成した音場の方向別STを
+  図\ref{fig:音場Aの方向別ST}から図\ref{fig:音場Dの方向別ST}に示す。
+
+  \begin{figure}[H]
+    \begin{minipage}[b]{.5\linewidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/experimentField/withLegend/expAEarly.png}
+        \subcaption*{$\mathrm{ST_{Early,dir}}$\\前方強め}
+    \end{minipage}%
+    \begin{minipage}[b]{.5\linewidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/experimentField/withLegend/expALate.png}
+        \subcaption*{$\mathrm{ST_{Late,dir}}$\\基準音場と同じ}
+    \end{minipage}
+    \caption{音場Aの方向別ST}
+    \label{fig:音場Aの方向別ST}
+  \end{figure}
+
+  \begin{figure}[H]
+    \begin{minipage}[b]{.5\linewidth}
+      \centering
+      \includegraphics[width=1\linewidth]{images/experimentField/withLegend/expBEarly.png}
+      \subcaption*{$\mathrm{ST_{Early,dir}}$\\後方強め}
+    \end{minipage}%
+    \begin{minipage}[b]{.5\linewidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/experimentField/withLegend/expBLate.png}
+        \subcaption*{$\mathrm{ST_{Late,dir}}$\\基準音場と同じ}
+    \end{minipage}
+    \caption{音場Bの方向別ST}
+    \label{fig:音場Bの方向別ST}
+  \end{figure}
+
+  \newpage
+
+  \begin{figure}[H]
+    \begin{minipage}[b]{.5\linewidth}
+      \centering
+      \includegraphics[width=1\linewidth]{images/experimentField/withLegend/expCEarly.png}
+      \subcaption*{$\mathrm{ST_{Early,dir}}$\\基準音場と同じ}
+    \end{minipage}%
+    \begin{minipage}[b]{.5\linewidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/experimentField/withLegend/expCLate.png}
+        \subcaption*{$\mathrm{ST_{Late,dir}}$\\前方強め}
+    \end{minipage}
+    \caption{音場Cの方向別ST}
+    \label{fig:音場Cの方向別ST}
+  \end{figure}
+
+  \begin{figure}[H]
+    \begin{minipage}[b]{.5\linewidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/experimentField/withLegend/expDEarly.png}
+        \subcaption*{$\mathrm{ST_{Early,dir}}$\\基準音場と同じ}
+    \end{minipage}%
+    \begin{minipage}[b]{.5\linewidth}
+        \centering
+        \includegraphics[width=1\linewidth]{images/experimentField/withLegend/expDLate.png}
+        \subcaption*{$\mathrm{ST_{Late,dir}}$\\後方強め}
+    \end{minipage}
+    \caption{音場Dの方向別ST}
+    \label{fig:音場Dの方向別ST}
+  \end{figure}
+
+%=====================================================================================
+
+
+
+
+\clearpage
+
+% 参考文献
+\input{bibmute_inline.tex}
+
+\end{document}
