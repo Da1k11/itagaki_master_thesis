@@ -10,7 +10,7 @@
 本章では、音場生成システムAFCを用いた実験音場の生成に関して述べる。まず、本研究で音場生成に用いるシステムである音場支援システムAFCとそれを導入した実験室（半無響室）について紹介する。続いて、生成する音場での方向別STおよび周波数特性の調整を含む残響時間とSTの調整方法について、音場の生成における考え方とそれに基づく具体的な調整値について説明する。最後に、コンサートホールを模して生成した音場を基準音場として、基準音場の音響特性と、基準音場から方向特性を変化させた音場の音響特性を測定した結果結果を示す。
 
 
-\section{音場支援システムAFC}
+\section{音場支援システムAFCについて}
 
 \subsection*{音場支援システムの概要}
 第1章4節でも触れたように、音場支援システム（Active Field Control Enhance、AFC）は、一つの空間において多様な演目を最適な響きの中で行いたいというモチベーションから開発されたシステムであり、最新の電気音響・信号処理技術を用いて、室内の響きや空間の拡がり・音量感などの聴感印象を自然に変化させることができる\cite{AFCの概要}。音源自体に人工的なリバーブを付加して異なる音の印象を作り出す手法とは異なり、楽器や歌声の自然な聴こえ方を保ちながら、その空間に拡がる音の残響感や音量感をコントロールし、用途に適した音響空間を提供できる点にその特徴がある。
@@ -138,8 +138,8 @@ AFCではスピーカーから再生された音がマイクへ戻る音響的�
 
 %=======================================================================
 %\newpage
-\section{音場の生成方法}
-前節にてAFCシステムの仕組みと本研究で用いる実験室およびシステム機器構成について紹介した。本節では、AFCを用いた音場の生成方法について述べる。
+\section{音場生成の準備}
+前節にてAFCシステムの仕組みと本研究で用いる実験室およびシステム機器構成について紹介した。本節ではAFCで音場生成を行う前の準備事項に関して、まず実験室に配置したマイクとスピーカーのルーティングについて、続いて調整で用いるFIRフィルタについて、最後に実験室における響きの制御幅について述べる。
 
 \subsection*{マイクとスピーカーのルーティング}
 2章4節にて設定した目標値を踏まえて、まず音場生成時のマイクとスピーカーのルーティングを決定する。前節で示したように、AFCのマイク入力はbusと呼ばれる信号処理系に割り当てられ、さらに4つのbusを一つのSystemとして取り扱う。本研究では、5つのSystemを作成して音場の生成を行った。
@@ -168,6 +168,82 @@ System5は、後期反射音の制御系だが、EMRの利用による後期反�
 \end{table}
 \vspace*{\stretch{1}}
 
+%=======================================================================
+\newpage
+\subsection*{重畳に用いるFIRフィルタ}
+響きの可変幅を十分に確保できるよう、重畳するFIRフィルタには図\ref{fig:FIRフィルタを測定したコンサートホール}に示す2000席程度の豊かな響きを持つコンサートホールにて実測したインパルス応答を用いた。初期反射音制御部には舞台付近で測定したインパルス応答を、後期反射音制御部には舞台から遠方にて測定したインパルス応答を用いた。それぞれについて、ともに異なる4点で測定したインパルス応答を用いており、これは完全に同じインパルス応答を用いることによってAFCシステム内のループごとの周波数特性が近くなることでカラレーションに対する安定性が低下するのを防ぐことを目的としている。重畳に用いたインパルス応答の時間波形を図\ref{fig:初期反射音の重畳に用いたFIRフィルタ}および図\ref{fig:後期反射音の重畳に用いたフィルタ}に示す。
+
+\lipsum[1-2]
+
+\vspace{\stretch{1}}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.5\linewidth]{images/convolutedIrHall.jpg}
+  \caption{FIRフィルタを測定したコンサートホール}
+  \label{fig:FIRフィルタを測定したコンサートホール}
+\end{figure}
+\vspace{\stretch{1}}
+
+%=======================================================================
+\newpage
+
+\vspace*{\stretch{1}}
+\begin{figure}[H]
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.8\linewidth]{images/convolutedIr/ER1.png}
+    \subcaption*{FIRフィルタ 1}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.8\linewidth]{images/convolutedIr/ER2.png}
+    \subcaption*{FIRフィルタ 2}
+  \end{minipage}
+
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.8\linewidth]{images/convolutedIr/ER3.png}
+    \subcaption*{FIRフィルタ 3}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.8\linewidth]{images/convolutedIr/ER4.png}
+    \subcaption*{FIRフィルタ 4}
+  \end{minipage}
+
+  \centering
+  \caption{初期反射音の重畳に用いたFIRフィルタ}
+  \label{fig:初期反射音の重畳に用いたFIRフィルタ}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.8\linewidth]{images/convolutedIr/REV1.png}
+    \subcaption*{FIRフィルタ 1}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.8\linewidth]{images/convolutedIr/REV2.png}
+    \subcaption*{FIRフィルタ 2}
+  \end{minipage}
+
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.8\linewidth]{images/convolutedIr/REV3.png}
+    \subcaption*{FIRフィルタ 3}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.8\linewidth]{images/convolutedIr/REV4.png}
+    \subcaption*{FIRフィルタ 4}
+  \end{minipage}
+
+  \centering
+  \caption{後期反射音の重畳に用いたFIRフィルタ}
+  \label{fig:後期反射音の重畳に用いたフィルタ}
+\end{figure}
+\vspace{\stretch{1}}
 %=======================================================================
 
 \newpage
@@ -250,88 +326,12 @@ AFCは響きを増幅するシステムであるため、実験室で実現可�
 \newpage
     
 
-%=====================================================================================
+%=======================================================================
 
   \section{生成音場の調整方法}
     
     \subsection{方向別STの調整方法}
-    実測した方向別STの値をもとに、生成する音場の方向別STを調整する。$\mathrm{ST_{Early,dir}}$は後方が大きく、
-    $\mathrm{ST_{Late,dir}}$は全方向から満遍なく反射音が到来していることがわかるため、このような方向特性を
-    実現することができるようにマイクとスピーカーの配置と結線を行った。実験室のシステム機器配置を
-    図\ref{fig:実験室におけるAFCのシステム機器配置}に、これらのルーティングを表\ref{tab:マイクとスピーカーのルーティング}に示す。
-    
-
-    また、響きの可変幅を十分に確保できるよう、重畳するFIRフィルタには図\ref{fig:FIRフィルタを測定したコンサートホール}に
-    示す2000席程度の豊かな響きを持つコンサートホールにて実測したインパルス応答を用いた。初期反射音制御部には舞台付近で
-    測定したインパルス応答を、後期反射音制御部には舞台から遠方にて測定したインパルス応答を用いた。それぞれについて、ともに
-    異なる4点で測定したインパルス応答を用いており、これは完全に同じインパルス応答を用いることによってAFCシステム内の
-    ループごとの周波数特性が近くなることでカラレーションに対する安定性が低下するのを防ぐことを目的としている。
-    重畳に用いたインパルス応答の時間波形を図\ref{fig:初期反射音の重畳に用いたFIRフィルタ}および
-    図\ref{fig:後期反射音の重畳に用いたフィルタ}に示す。
-
-    \begin{figure}[H]
-      \centering
-      \includegraphics[width=.6\linewidth]{images/convolutedIrHall.jpg}
-      \caption{FIRフィルタを測定したコンサートホール}
-      \label{fig:FIRフィルタを測定したコンサートホール}
-    \end{figure}
-
-    \begin{figure}[H]
-      \begin{minipage}[b]{.5\linewidth}
-          \centering
-          \includegraphics[width=.9\linewidth]{images/convolutedIr/ER1.png}
-          \subcaption*{FIRフィルタ 1}
-      \end{minipage}%
-      \begin{minipage}[b]{.5\linewidth}
-          \centering
-          \includegraphics[width=.9\linewidth]{images/convolutedIr/ER2.png}
-          \subcaption*{FIRフィルタ 2}
-      \end{minipage}
-
-      \begin{minipage}[b]{.5\linewidth}
-          \centering
-          \includegraphics[width=.9\linewidth]{images/convolutedIr/ER3.png}
-          \subcaption*{FIRフィルタ 3}
-      \end{minipage}%
-      \begin{minipage}[b]{.5\linewidth}
-          \centering
-          \includegraphics[width=.9\linewidth]{images/convolutedIr/ER4.png}
-          \subcaption*{FIRフィルタ 4}
-      \end{minipage}
-
-      \centering
-      \caption{初期反射音の重畳に用いたFIRフィルタ}
-      \label{fig:初期反射音の重畳に用いたFIRフィルタ}
-    \end{figure}
-
-    \begin{figure}[H]
-      \begin{minipage}[b]{.5\linewidth}
-          \centering
-          \includegraphics[width=.9\linewidth]{images/convolutedIr/REV1.png}
-          \subcaption*{FIRフィルタ 1}
-      \end{minipage}%
-      \begin{minipage}[b]{.5\linewidth}
-          \centering
-          \includegraphics[width=.9\linewidth]{images/convolutedIr/REV2.png}
-          \subcaption*{FIRフィルタ 2}
-      \end{minipage}
-
-      \begin{minipage}[b]{.5\linewidth}
-          \centering
-          \includegraphics[width=.9\linewidth]{images/convolutedIr/REV3.png}
-          \subcaption*{FIRフィルタ 3}
-      \end{minipage}%
-      \begin{minipage}[b]{.5\linewidth}
-          \centering
-          \includegraphics[width=.9\linewidth]{images/convolutedIr/REV4.png}
-          \subcaption*{FIRフィルタ 4}
-      \end{minipage}
-
-      \centering
-      \caption{後期反射音の重畳に用いたFIRフィルタ}
-      \label{fig:後期反射音の重畳に用いたフィルタ}
-    \end{figure}
-
+ 
     $\mathrm{ST_{Early,dir}}$および$\mathrm{ST_{Late,dir}}$を目標値に近づけて制御するためには、初期反射音と
     後期反射音の成分をある程度独立に制御することが必要となる。初期反射音制御部のために付加したエネルギーが後期反射音の
     評価区間に漏れ出す量を少なくするため、初期反射音制御部では重畳するFIRフィルタにフェードアウトを設定することにより
