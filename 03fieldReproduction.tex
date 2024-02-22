@@ -13,14 +13,14 @@
 \section{音場支援システムAFC}
 
 \subsection*{音場支援システムの概要}
-第1章4節でも触れたように、音場支援システム（Active Field Control Enhance、AFC）は、一つの空間において多様な演目を最適な響きの中で行いたいというモチベーションから開発されたシステムであり、最新の電気音響・信号処理技術を用いて、室内の響きや空間の拡がり・音量感などの聴感印象を自然に変化させることができる\cite{AFC}。音源自体に人工的なリバーブを付加して異なる音の印象を作り出す手法とは異なり、楽器や歌声の自然な聴こえ方を保ちながら、その空間に拡がる音の残響感や音量感をコントロールし、用途に適した音響空間を提供できる点にその特徴がある。
+第1章4節でも触れたように、音場支援システム（Active Field Control Enhance、AFC）は、一つの空間において多様な演目を最適な響きの中で行いたいというモチベーションから開発されたシステムであり、最新の電気音響・信号処理技術を用いて、室内の響きや空間の拡がり・音量感などの聴感印象を自然に変化させることができる\cite{AFCの概要}。音源自体に人工的なリバーブを付加して異なる音の印象を作り出す手法とは異なり、楽器や歌声の自然な聴こえ方を保ちながら、その空間に拡がる音の残響感や音量感をコントロールし、用途に適した音響空間を提供できる点にその特徴がある。
 
-マイクロフォンとスピーカーを配置して音場を生成するシステムにおける信号処理の方式は、マイクで収音した音をスピーカーから再生し、その直接音に空間固有の響きが加わった音をもう一度収音する音響的フィードバックを利用する室内音場制御方式と、収音した音に様々な実測インパルス応答のデータを畳み込むことで任意の音場を再現する音場合成方式の二つの方式に大別され、AFCではこれら二つの方式を兼ね備えたハイブリッドなシステムとして構成されている。
+マイクロフォンとスピーカーを配置して音場を生成するシステムにおける信号処理の方式は、マイクで収音した音をスピーカーから再生し、スピーカーからの再生音に空間固有の響きが加わった音を再びマイクで収音する音響的フィードバックを利用する室内音場制御方式と、収音した音に様々な実測インパルス応答のデータを畳み込むことで任意の音場を再現する音場合成方式の二つの方式に大別され、AFCではこれら二つの方式を兼ね備えたハイブリッドなシステムとして構成されている\cite{AFCEnhance}。
 
 %=======================================================================
 \newpage
 \subsection*{音場支援システムの仕組み}
-響きの聴覚印象には初期反射音と残響音（後期反射音）がそれぞれ異なる影響を与えていると考えられ、AFCにおける音響信号の処理系統も、初期反射音制御部と後期反射音制御部に大きく分かれてそれぞれの反射音成分をある程度独立に制御している。この概略図を図\ref{fig:AFCにおける初期反射音と後期反射音の独立制御の様子}に示す。
+響きの聴覚印象には初期反射音と残響音（後期反射音）がそれぞれ異なる影響を与えていると考えられ、AFCにおける音響信号の処理系統も、初期反射音制御部と後期反射音制御部に大きく分かれてそれぞれの反射音成分をある程度独立に制御している。この概略図を図\ref{fig:AFCにおける初期反射音と後期反射音の制御の概略図}に示す。
 
 どちらの制御部においても、マイクロホンで収音した音に対してインパルス応答の畳み込みによる響きの付加を行ってからスピーカーでその信号を再生し、響きを増幅させる点は共通している。初期反射音制御部では演奏者の付近に設置した指向性マイクによって主に直接音と舞台上からの初期反射音を収音して初期反射音成分に相当する響きをスピーカーから再生させるのに対し、後期反射音制御部では演奏者から遠方に付置した全指向性マイクによって主に空間の残響音とスピーカーから再生される音響フィードバック成分を収音して後期反射音に相当する響きをスピーカーから再生させている。
 
@@ -33,8 +33,8 @@ AFCではスピーカーから再生された音がマイクへ戻る音響的�
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.8\linewidth]{images/AFCsystemOverView.png}
-  \caption{AFCにおける信号処理系統の概要}
-  \label{fig:AFCにおける信号処理の概要}
+  \caption{AFCにおける初期反射音と後期反射音の制御の概略図}
+  \label{fig:AFCにおける初期反射音と後期反射音の制御の概略図}
 \end{figure}
 
 \vspace{\stretch{1}}
@@ -44,7 +44,7 @@ AFCではスピーカーから再生された音がマイクへ戻る音響的�
 \vspace*{\stretch{1}}
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.8\linewidth]{images/AFCbusProcessing.png}
+  \includegraphics[width=0.9\linewidth]{images/AFCbusProcessing.png}
   \caption{busごとの信号処理の概要}
   \label{fig:busごとの信号処理の概要}
 \end{figure}
@@ -53,7 +53,7 @@ AFCではスピーカーから再生された音がマイクへ戻る音響的�
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.8\linewidth]{images/AFCsystemProcessing.png}
+  \includegraphics[width=0.9\linewidth]{images/AFCsystemProcessing.png}
   \caption{Systemによる信号処理の概要}
   \label{fig:Systemによる信号処理の概要}
 \end{figure}
@@ -62,15 +62,127 @@ AFCではスピーカーから再生された音がマイクへ戻る音響的�
 %=======================================================================
 
 \newpage
-AFCを用いることによりカルテットによる演奏実験および現実のホールでの測定と同様の音場測定が実施可能なある程度広い範囲に現実に即した自然な音場を生成することが可能であり、また導入する室をもともとの響きのない半無響室とすることで大きな制御幅を得ることが期待できる。
+\subsection*{実験室におけるAFCのシステム機器配置}
+もともとの響きの小さい室でAFCを用いることにより、大きな制御幅を得て自由度の高い音場の生成を行えることが期待できるため、本実験では半無響室にAFCを導入して用いることとした。導入したAFCシステムを構成する音響機材は4つのカージオイドマイク、4つの無指向性マイク、および20個のスピーカーであり、実験室の内部の様子を図\ref{fig:実験室の内部の様子}に、音響機材の配置を図\ref{fig:AFCのシステム機器配置}に示す。
 
-音場の支援を目的として開発されたシステムである。AFCは、音場の再現において重要な要素である初期反射音と後期反射音をそれぞれ制御するための2つの部分から構成されている。初期反射音制御部は、音場の初期反射音を制御するためのFIRフィルタを用いて音場の初期反射音の到来方向を制御する。後期反射音制御部は、音場の後期反射音を制御するためのFIRフィルタを用いて音場の後期反射音の到来方向を制御する。AFCの概要を図\ref{fig:AFCの概要}に示す。
+また、生成する音場の評価を行うための音響測定は実験室の中央で行うものとし、音響測定時の測定機器の配置を図\ref{fig:音響測定機器の配置}に、そのときの様子を図\ref{fig:音響測定時の様子}示す。なお、紙面の上方を実験室の前方として実験室内における方向を定義した。
 
-\subsection*{実験室における音場の可変幅の確認}
+\vspace{\stretch{1}}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\linewidth]{images/twoPiRoom/twoPiRoomPhoto.png}
+  \caption{実験室の内部の様子}
+  \label{fig:実験室の内部の様子}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{minipage}[b]{0.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/twoPiRoom/measureSetting.png}
+    \caption{音響測定機器の配置}
+    \label{fig:音響測定機器の配置}
+  \end{minipage}%
+  \begin{minipage}[b]{0.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/twoPiRoom/measureSettingPhotoResized.jpg}
+    \caption{音響測定時の様子}
+    \label{fig:音響測定時の様子}
+  \end{minipage}
+\end{figure}
+
+\vspace{\stretch{1}}
+%=======================================================================
+
+\newpage
+\vspace*{\stretch{1}}
+\begin{figure}[H]
+  \begin{minipage}[b]{1\linewidth}
+    \centering
+    \includegraphics[width=.6\linewidth]{images/twoPiRoom/afcEquipArrayVertical.png}
+    \subcaption{断面図}
+    \label{fig:AFC機器配置断面図}
+  \end{minipage}
+
+  \begin{minipage}[b]{0.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/twoPiRoom/afcEquipArrayMic.png}
+    \subcaption{マイクロホン配置}
+    \label{fig:マイクロホン配置}
+  \end{minipage}%
+  \begin{minipage}[b]{0.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/twoPiRoom/afcEquipArraySp3.png}
+    \subcaption{スピーカー配置 三層目}
+    \label{fig:スピーカー配置 三層目}
+    \vfill
+  \end{minipage}
+
+  \begin{minipage}[b]{0.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/twoPiRoom/afcEquipArraySp2.png}
+    \subcaption{スピーカー配置 二層目}
+    \label{fig:スピーカー配置 二層目}
+  \end{minipage}%
+  \begin{minipage}[b]{0.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/twoPiRoom/afcEquipArraySp1.png}
+    \subcaption{スピーカー配置 一層目}
+    \label{fig:スピーカー配置 一層目}
+    \vfill
+  \end{minipage}
+
+  \caption{AFCのシステム機器配置}
+  \label{fig:AFCのシステム機器配置}
+\end{figure}
+\vspace{\stretch{1}}
+
+%=======================================================================
+%\newpage
+\section{音場の生成方法}
+前節にてAFCシステムの仕組みと本研究で用いる実験室およびシステム機器構成について紹介した。本節では、AFCを用いた音場の生成方法について述べる。
+
+\subsection*{マイクとスピーカーのルーティング}
+2章4節にて設定した目標値を踏まえて、まず音場生成時のマイクとスピーカーのルーティングを決定する。前節で示したように、AFCのマイク入力はbusと呼ばれる信号処理系に割り当てられ、さらに4つのbusを一つのSystemとして取り扱う。本研究では、5つのSystemを作成して音場の生成を行った。
+
+System1は、大まかな初期反射音成分の付加のため、入力系としてカージオイドマイクであるMic.1〜4の信号を用い、出力系として後方側からの再生音がやや多くなるように全方向のスピーカーを割り当てた。
+
+System2は、水平面内からの全体的な後期反射音を満遍なく付加するため、マイクの入力とbusのルーティングを切り替える処理であるEMRをオンにした上で、入力系として全指向性マイクであるMic.5〜8の信号を用い、出力系として実験室の対角線上に配置した8つのスピーカーを割り当てた。
+
+System3は、System2のみでは不足する上方からの後期反射音を増強して供給するため、入力系として全指向性マイクであるMic.5〜8の信号を用い、出力系として実験室の天井に設置した4つのスピーカーを割り当てた。
+
+System4は、System1ではエネルギーの量が不足する後方からの初期反射音を増強しつつ、System1で小さくなるように調整する前方から初期反射音の供給量を細かく調整できるよう、出力系として実験室の後方に設置した3つのスピーカーと、前方に設置した1つのスピーカーを割り当てた。入力系としては、カージオイドマイクであるMic.1〜4を用いた場合にカラレーションが発生したため、全指向性マイクであるMic.5〜8の信号を用いた。
+
+System5は、後期反射音の制御系だが、EMRの利用による後期反射音の方向特性の時変的な変化を是正して安定させるため、EMRの利用によるルーティングの切り替えは行わずに、全指向性マイクであるMic.5〜8の信号を用い、出力系として実験室の前後左右方向に設置した4つのスピーカーを割り当てた。
+
+初期反射音および後期反射音ともに、床からの反射音供給によって、上方よりも下方からの寄与が大きくなる傾向が見られたため、System4およびSystem5では、前後左右方向の反射音供給を行うスピーカーとして、床面に近い1層目ではなく、床面から離れた2層目のスピーカーを用いた。
+
+これらのルーティングを表\ref{tab:マイクとスピーカーのルーティング}に示す。
+
+\newpage
+\vspace*{\stretch{1}}
+\begin{table}[H]
+  \centering
+  \caption{マイクとスピーカーのルーティング}
+  \label{tab:マイクとスピーカーのルーティング}
+  \includegraphics[width=1\linewidth]{images/experimentField/micSpRooting.pdf}
+\end{table}
+\vspace*{\stretch{1}}
+
+%=======================================================================
+
+\newpage
+\subsection*{AFCの音場生成における制御幅}
 実験室に響きを付加するにあたり、目標とした音場が実験室で実現可能な響きの幅、すなわち最小の響きの条件と最大の響きの範囲に収まることを確認する必要がある。
 
 AFCは響きを増幅するシステムであるため、実験室で実現可能な最小の響きは、AFCをオフにしたときの響きとなる。AFCをオフししたときの$\mathrm{ST_{Early,dir}}$、$\mathrm{ST_{Late,dir}}$を表\ref{table:響き小の方向別ST}に示す。
 
+この結果、AFCをオフにしたときの$\mathrm{ST_{Late,dir}}$は非常に小さく、この評価区間では音がほぼ完全に吸音されており、後期反射音についてはシステムで付加する成分によってほぼ完全に決定されると考えられる。一方で、$\mathrm{ST_{Early,dir}}$は$\SI{-25}{\dB}$前後と、$\mathrm{ST_{Late,dir}}$に比べて大きな値となっていた。これは半無響室に配置した吸音材に吸音され切らなかった低次の反射音がわずかに$100$〜$\SI{100}{\ms}$の間に残っているためと考えられる。特にFront方向では図\ref{fig:生成音場の目標値}に示した基準音場の生成目標値との差が約$\SI{3}{\dB}$に迫っており、慎重な調整が必要となる。
+
+響きを増やすことに関してはある程度自由度を持って調整することができるが、AFCでつける響きを大きくしていく、つまり再生音の音量を上げていくと、ある音量を超えたときに不自然な音色の変化（カラレーション）が発生し始める。カラレーションが起こり始める音量の条件はイコライザの設定による周波数特性の変化をはじめとする様々な要素によって変化し、最大の響きの条件を厳密に調べることはできないが、イコライザによる周波数特性の補正を行わずに、その分のゲインの稼得を残す安全側にて響きの可変幅を大まかに検討する。周波数特性の手動調整を行わずに仮の設定でAFCをオンにして、カラレーションの生じ始めを聴感的に確認し、その直前の音量の設定における$\mathrm{ST_{Early,dir}}$および$\mathrm{ST_{Late,dir}}$を測定した。その結果を表\ref{table:響き大の方向別ST}に示す。
+
+これらの結果から、実験室における$\mathrm{ST_{Early,dir}}$と$\mathrm{ST_{Late,dir}}$はコンサートホールでの実測値と同程度の値を十分取ることができると考えられ、詳細な設定により所望の音場を実現しうることが期待できる。
+
+\vspace{\stretch{1}}
 \begin{table}[H]
   \centering
   \caption{AFCをオフにしたときの$\mathrm{ST_{Early,dir}}$、$\mathrm{ST_{Late,dir}}$}
@@ -101,10 +213,6 @@ AFCは響きを増幅するシステムであるため、実験室で実現可�
     $\mathrm{ST_{Late,dir}}$ (dB) & -65.5 & -66.7 & -67.0 &-65.6 & -66.6 & -64.2 \\ \hline \hline
   \end{tabular}
 \end{table}
-
-響きを増やすことに関してはある程度自由度を持って調整することができるが、AFCでつける響きを大きくしていく、つまり再生音の音量を上げていくと、ある音量を超えたときに不自然な音色の変化（カラレーション）が発生し始める。カラレーションが起こり始める音量の条件はイコライザの設定等様々な要素によって変化するため最大の響きを厳密に調べることは困難である。
-    
-実験室での可変幅の大まかな検討のため、イコライザによる周波数特性の手動調整を行わずに仮の設定でAFCをオンにし、カラレーションの生じ始めを聴感的に確認し、その直前の音量の設定における$\mathrm{ST_{Early,dir}}$および$\mathrm{ST_{Late,dir}}$を測定した。その結果を表\ref{table:響き大の方向別ST}に示す。
 
 \begin{table}[H]
   \centering
@@ -137,36 +245,9 @@ AFCは響きを増幅するシステムであるため、実験室で実現可�
   \end{tabular}
 \end{table}
 
-    
-
-これらの結果とコンサートホールでの実測値から、実験室における$\mathrm{ST_{Early,dir}}$と$\mathrm{ST_{Late,dir}}$はコンサートホールでの実測値と同程度の値を十分取ることができると考えられ、詳細な設定により所望の音場を実現しうることが期待できる。
-%=====================================================================================
-
-  \section{生成する基準音場の目標値}
-    第3章における実際のコンサートホールでの測定結果について、標準的な演奏位置である舞台中央・前方側の4点（S01・S02・S05・S06）における
-    全ホールの$\mathrm{ST_{Early,dir}}$および$\mathrm{ST_{Late,dir}}$は図\ref{fig:舞台中央・前方側4点の方向別ST}
-    に示す通りである。実線が測定値の平均、色付きの領域が測定値の標準偏差を平均値に加算またはまたは減算した区間（1シグマ区間）を表す。
-
-    \begin{figure}[H]
-      \begin{minipage}
-        [b]{.5\linewidth}
-        \centering
-        \includegraphics[width=1\linewidth]{images/targetFieldEarlywithLegend.png}
-        \subcaption*{$\mathrm{ST_{Early,dir}}$}
-      \end{minipage}%
-      \begin{minipage}
-        [b]{.5\linewidth}
-        \centering
-        \includegraphics[width=1\linewidth]{images/targetFieldLatewithLegend.png}
-        \subcaption*{$\mathrm{ST_{Late,dir}}$}
-      \end{minipage}
-    \centering
-    \label{fig:舞台中央・前方側4点の方向別ST}
-    \caption{舞台中央・前方側4点の方向別ST}
-    \end{figure}
-
-    この結果は第3章において検討した実験室における音場の可変幅の中で生成しうると期待できるため、基準音場として生成する音場は
-    この全ホールの舞台前方中央付近での測定点の実測値の平均値から±1シグマ区間の間を目標値として設定する。
+\vspace{\stretch{1}}
+%=======================================================================
+\newpage
     
 
 %=====================================================================================
@@ -178,108 +259,7 @@ AFCは響きを増幅するシステムであるため、実験室で実現可�
     $\mathrm{ST_{Late,dir}}$は全方向から満遍なく反射音が到来していることがわかるため、このような方向特性を
     実現することができるようにマイクとスピーカーの配置と結線を行った。実験室のシステム機器配置を
     図\ref{fig:実験室におけるAFCのシステム機器配置}に、これらのルーティングを表\ref{tab:マイクとスピーカーのルーティング}に示す。
-
-
-    \begin{table}[H]
-      \centering
-      \caption{マイクとスピーカーのルーティング}
-      \label{tab:マイクとスピーカーのルーティング}
-
-      \begin{tabular}[H]{|c||cccc|cccc|cccc|cccc|cccc|}
-        \hline
-        system &
-        \multicolumn{4}{c|}{
-          \begin{tabular}{c}
-            1 EMRなし\\
-            初期反射音
-          \end{tabular}
-        }& 
-        \multicolumn{4}{c|}{
-          \begin{tabular}{c}
-            2 EMRあり\\
-            後期反射音
-          \end{tabular}
-        }&
-        \multicolumn{4}{c|}{
-          \begin{tabular}{c}
-            3 EMRあり\\
-            後期反射音
-          \end{tabular}}&
-        \multicolumn{4}{c|}{
-          \begin{tabular}{c}
-            4 EMRなし\\
-            初期反射音
-          \end{tabular}
-        }& 
-        \multicolumn{4}{c|}{
-          \begin{tabular}{c}
-            5 EMRなし\\
-            後期反射音
-          \end{tabular}
-        } \\ \hline
-        mic  & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 5 & 6 & 7 & 8 & 5 & 6 & 7 & 8 & 5 & 6 & 7 & 8 \\ \hline \hline
-        Sp.1 &  &  &  &  &    &  &  & x&   &  &  &  &   &  &  &  &   &  &  & \\ 
-        Sp.2 &  &  &  &  &    &  &  &  &   &  &  &  &   &  &  &  &   &  &  & \\
-        Sp.3 &  &  &  &  &    & x&  &  &   &  &  &  &   &  &  &  &   &  &  & \\
-        Sp.4 &  & o&  &  &    &  &  &  &   &  &  &  &   &  &  &  &   &  &  & \\
-        Sp.5 &  &  &  &  &   x&  &  &  &   &  &  &  &   &  &  &  &   &  &  & \\
-        Sp.6 &  &  &  &  &    &  &  &  &   &  &  &  &   &  &  &  &   &  &  & \\
-        Sp.7 &  &  &  &  &    &  & x&  &   &  &  &  &   &  &  &  &   &  &  & \\
-        Sp.8 &  &  & o&  &    &  &  &  &   &  &  &  &   &  &  &  &   &  &  & \\ \hline
-        Sp.9 &  &  &  &  &    &  &  & x&   &  &  &  &   &  &  &  &   &  &  & \\
-        Sp.10 & &  &  & o&    &  &  &  &   &  &  &  &   &  &  &  &   & o&  & \\
-        Sp.11 & &  & o&  &    &  &  &  &   &  &  &  &   &  &  & o&   &  &  & \\
-        Sp.12 & &  &  &  &    &  &  &  &   &  &  &  &   & o&  &  &  o&  &  & \\
-        Sp.13 & & o&  &  &   x& x&  &  &   &  &  &  &  o&  &  &  &   &  &  & \\
-        Sp.14 & o& &  &  &    &  &  &  &   &  &  &  &   &  &  &  &   &  & o& \\
-        Sp.15 & &  &  &  &    &  & x&  &   &  &  &  &   &  &  &  &   &  &  & o\\
-        Sp.16 & &  &  &  &    &  &  &  &   &  &  &  &   &  & o&  &   &  &  & \\ \hline
-        Sp.17 & &  &  &  &    &  &  &  &   x& &  &  &   &  &  &  &   &  &  & \\
-        Sp.18 & &  &  & o&    &  &  &  &   & x&  &  &   &  &  &  &   &  &  & \\
-        Sp.19 &o&  &  &  &    &  &  &  &   &  & x&  &   &  &  &  &   &  &  & \\
-        Sp.20 & &  &  &  &    &  &  &  &   &  &  & x&   &  &  &  &   &  &  & \\ \hline
-        
-      \end{tabular}
-    \end{table}
-
-    \begin{figure}[H]
-      \begin{minipage}[b]{1\linewidth}
-          \centering
-          \includegraphics[width=.6\linewidth]{images/afcEquipArrayVertical.png}
-          \subcaption{断面図}
-          \label{fig:AFC機器配置断面図}
-      \end{minipage}
-  
-      \begin{minipage}[b]{0.5\linewidth}
-          \centering
-          \includegraphics[width=.9\linewidth]{images/afcEquipArrayMic.png}
-          \subcaption{マイクロホン配置}
-          \label{fig:マイクロホン配置}
-      \end{minipage}%
-      \begin{minipage}[b]{0.5\linewidth}
-        \centering
-        \includegraphics[width=.9\linewidth]{images/afcEquipArraySp3.png}
-        \subcaption{スピーカー配置 三層目}
-        \label{fig:スピーカー配置 三層目}
-        \vfill
-      \end{minipage}
-  
-      \begin{minipage}[b]{0.5\linewidth}
-          \centering
-          \includegraphics[width=.9\linewidth]{images/afcEquipArraySp2.png}
-          \subcaption{スピーカー配置 二層目}
-          \label{fig:スピーカー配置 二層目}
-      \end{minipage}%
-      \begin{minipage}[b]{0.5\linewidth}
-        \centering
-        \includegraphics[width=.9\linewidth]{images/afcEquipArraySp1.png}
-        \subcaption{スピーカー配置 一層目}
-        \label{fig:スピーカー配置 一層目}
-        \vfill
-      \end{minipage}
-      \caption{実験室におけるAFCのシステム機器配置}
-      \label{fig:実験室におけるAFCのシステム機器配置}
-  \end{figure}
+    
 
     また、響きの可変幅を十分に確保できるよう、重畳するFIRフィルタには図\ref{fig:FIRフィルタを測定したコンサートホール}に
     示す2000席程度の豊かな響きを持つコンサートホールにて実測したインパルス応答を用いた。初期反射音制御部には舞台付近で
