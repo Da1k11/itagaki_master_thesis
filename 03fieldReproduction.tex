@@ -324,160 +324,794 @@ AFCは響きを増幅するシステムであるため、実験室で実現可�
 \vspace{\stretch{1}}
 %=======================================================================
 \newpage
-    
 
-%=======================================================================
+\section{生成音場の調整方法}
+図\ref{fig:busごとの信号処理の概要}および図\ref{fig:Systemによる信号処理の概要}に示したように、AFCにおける調整項目はFIRフィルタの畳み込み、遅れ時間の付加、音量の増減、イコライザによる周波数特性の補正からなる。いずれの調整においても、AFCのシステムで響きが付加された室内での音響測定と調整項目の変更を繰り返し、所望の値に近づけていく必要がある。なお、本実験で用いた実験室における音響測定では、部屋の広さによる制約により、直接音の減衰が大きいため残響時間の評価としてよく用いられる $\mathrm{T_{20}}$ または $\mathrm{T_{30}}$ を適切に測定することができない。そこで本研究では、$\mathrm{ST}$の測定条件によるインパルス応答の測定結果からエネルギーの減衰曲線を描き、$\SI{-15}{dB}$から$\SI{-45}{dB}$までの減衰曲線の傾きを読むことにより残響時間を求めることとした。
 
-  \section{生成音場の調整方法}
-    
-    \subsection{方向別STの調整方法}
- 
-    $\mathrm{ST_{Early,dir}}$および$\mathrm{ST_{Late,dir}}$を目標値に近づけて制御するためには、初期反射音と
-    後期反射音の成分をある程度独立に制御することが必要となる。初期反射音制御部のために付加したエネルギーが後期反射音の
-    評価区間に漏れ出す量を少なくするため、初期反射音制御部では重畳するFIRフィルタにフェードアウトを設定することにより
-    信号長を$\SI{120}{ms}$に限定した。
-    
-    また、後期反射音制御部では、反射音の付加に長い遅れ時間を加えることで$\mathrm{ST_{Early,dir}}$の評価区間に入るエネルギーを
-    減らすことができるが、遅れ時間が大きすぎるとエコー障害が生じる恐れがある。本研究では、$\SI{45}{ms}$の遅れ時間を
-    付け加えることにより、聴感的な自然さを保ちつつ$\mathrm{ST_{Early,dir}}$への影響を低減した。
+\subsection*{FIRフィルタの設定}
+$\mathrm{ST_{Early,dir}}$および$\mathrm{ST_{Late,dir}}$を目標値に近づけて制御するためには、初期反射音と後期反射音の成分をある程度独立に制御することが必要となる。初期反射音制御部のために付加したエネルギーが後期反射音の評価区間に漏れ出す量を少なくするため、初期反射音制御部では重畳するFIRフィルタにフェードアウトを設定することにより信号長を$\SI{120}{ms}$に限定した。
+また、生成した音場の残響時間は通常よくあるコンサートホールでの残響時間よりもかなり長くなる傾向があったため、後期反射音制御部で重畳するFIRフィルタにフェードアウトを設定することで残響時間を短くし、$\SI{1.8}{秒}$程度の自然な長さになるよう調整した。
+  
+\subsection*{遅れ時間の付与}
+後期反射音制御部では、反射音の付加に長い遅れ時間を加えることで$\mathrm{ST_{Early,dir}}$の評価区間に入るエネルギーを減らすことができるが、遅れ時間が大きすぎるとエコー障害が生じる恐れがある。本研究では、$\SI{45}{ms}$の遅れ時間を付け加えることにより、聴感的な自然さを保ちつつ$\mathrm{ST_{Early,dir}}$への影響を低減した。
 
-    \subsection{その他の音響特性の調整方法}
-      \subsubsection{残響時間の調整}
-      本実験で用いた実験室における音響測定では、部屋の広さによる制約により、直接音の減衰が大きいため残響時間の評価として
-      よく用いられる $\mathrm{T_{20}}$ または $\mathrm{T_{30}}$ を適切に測定することができない。
-      そこで本研究では、$\mathrm{ST}$の測定条件によるインパルス応答の測定結果からエネルギーの減衰曲線を描き、
-      $\SI{-15}{dB}$から$\SI{-45}{dB}$までの減衰曲線の傾きを読むことにより残響時間を求めた。
-      生成した音場の残響時間は通常よくあるコンサートホールでの残響時間よりもかなり長くなる傾向があったため、
-      後期反射音制御部で重畳するFIRフィルタにフェードアウトを設定することで残響時間を短くし、$\SI{1.8}{秒}$程度
-      の自然な長さになるよう調整した。
-      
-      \subsubsection{周波数特性の調整}
-      オクターブバンドごとのSTおよび残響時間の値が極端にばらつくことを防ぐため、測定とAFCシステム内部の
-      イコライザの調整を繰り返して周波数特性を調整した。
+\subsection*{音量の増減}
+方向別STの調整には主にゲインの変更による音量の増減を用いた。初期反射音制御部では、主に後方からの反射音を強めるために後方の音量を増加させたほか、左右からの反射音供給量を増減させて左右の偏りがなくなるよう調整した。後期反射音制御部では、方向別の偏りがなるべく小さくなるように音量を調整した。
+
+\subsection*{イコライザによる周波数特性の補正}
+AFCのイコライザ設定は自動設定部と手動設定部に分かれており、主にハウリングを抑えるための大まかな設定に自動設定部を、カラレーションや聴感上の不自然さの低減に手動調整部を用いる。本研究においては、上記の役割に加え、手動調整部のイコライザの設定の変更を繰り返して、オクターブバンドごとのSTおよび残響時間の値が極端にばらつくことを防ぐように周波数特性を調整した。
 
 %=====================================================================================
 
 \section{生成した音場の特性}
 
-  \subsection{基準音場}
-  コンサートホールのステージを模して生成した基準音場の方向別STを図\ref{fig:基準音場の方向別ST}に示す。
-  各方向での目標値からの差はすべて$\SI{1}{dB}$未満であり、およそ目標値の通りの方向別STを実現することが
-  できた。
-  
-  残響時間およびSTを図\ref{fig:基準音場の残響時間とST}に示す。残響時間および$\mathrm{ST_{Late,dir}}$は
-  すべてのオクターブバンドでほぼフラットな周波数特性となった。$\mathrm{ST_{Early,dir}}$は室自体の持つ特性
-  が影響していると考えられ、完全な制御はできていないが、平均値からの偏差はすべてのオクターブバンドで$\SI{1}{dB}$
-  程度に収めることができた。
-  
-  減衰曲線を図\ref{fig:基準音場の減衰曲線}に示す。AFCで生成した音場では、エネルギーの付加によって特に響きの
-  後期反射音側で減衰曲線が盛り上がる場合があるが、今回生成した音場ではこのような現象は見られず、実際の空間と
-  同様の直線的な減衰が確認できた。
+\subsection{基準音場}
+コンサートホールのステージを模して生成した基準音場の方向別STを図\ref{fig:基準音場の方向別ST}に示す。各方向での目標値からの差はすべて$\SI{1}{dB}$未満であり、およそ目標値の通りの方向別STを実現することができた。
 
-  \begin{figure}[H]
-    \begin{minipage}
-      [b]{.5\linewidth}
-      \centering
-      \includegraphics[width=1\linewidth]{images/experimentField/withLegend/baseEarlyOnTarget4.png}
-      \subcaption*{$\mathrm{ST_{Early,dir}}$}
-    \end{minipage}%
-    \begin{minipage}
-      [b]{.5\linewidth}
-      \centering
-      \includegraphics[width=1\linewidth]{images/experimentField/withLegend/baseLateOnTarget4.png}
-      \subcaption*{$\mathrm{ST_{Late,dir}}$}
-      \end{minipage}
-    \caption{基準音場の方向別ST}
-    \label{fig:基準音場の方向別ST}
-  \end{figure}
+残響時間およびSTを図\ref{fig:基準音場の残響時間とST}に示す。残響時間および$\mathrm{ST_{Late}}$はすべてのオクターブバンドでほぼフラットな周波数特性となった。$\mathrm{ST_{Early}}$は室自体の持つ特性が影響していると考えられ、完全な制御はできていないが、平均値からの偏差はすべてのオクターブバンドで$\SI{1}{dB}$程度に収めることができた。
 
-  \begin{figure}[H]
+減衰曲線を図\ref{fig:基準音場の減衰曲線}に示す。AFCで生成した音場では、エネルギーの付加によって特に響きの後期反射音側で減衰曲線が盛り上がる場合があるが、今回生成した音場ではこのような現象は見られず、実際の空間と同様の直線的な減衰が確認できた。
+
+AFCの調整パラメータについて、図\ref{fig:AFC操作画面}から図\ref{fig:イコライザ手動調整部2}に示す。
+
+\vspace{\stretch{1}}
+\begin{figure}[H]
+  \begin{minipage}
+    [b]{.5\linewidth}
     \centering
-    \includegraphics[width=.8\linewidth]{images/fieldO_stRt.png}
-    \caption{基準音場の残響時間とST}
-    \label{fig:基準音場の残響時間とST}
-  \end{figure}
-
-  \begin{figure}[H]
+    \includegraphics[width=1\linewidth]{images/experimentField/withLegend/00beseOnTargetEarly.pdf}
+    %\subcaption*{$\mathrm{ST_{Early,dir}}$}
+  \end{minipage}%
+  \begin{minipage}
+    [b]{.5\linewidth}
     \centering
-    \includegraphics[width=.8\linewidth]{images/fieldO_EnergyDecayCurve.png}
-    \caption{基準音場の減衰曲線}
-    \label{fig:基準音場の減衰曲線}
-  \end{figure}
-
-  %=====================================================================================
-
-  \subsection{方向の偏りをつけた音場}
-  基準音場に対して、初期反射音・後期反射音のそれぞれについて、前方からの反射を強めた音場と後方からの反射を
-  強めた音場を生成した。初期反射音の前方を強めた音場を音場A、初期反射音の後方を強めた音場を音場B、後期反射音の
-  前方を強めた音場を音場C、後期反射音の後方を強めた音場を音場Dとする。生成した音場の方向別STを
-  図\ref{fig:音場Aの方向別ST}から図\ref{fig:音場Dの方向別ST}に示す。
-
-  \begin{figure}[H]
-    \begin{minipage}[b]{.5\linewidth}
-        \centering
-        \includegraphics[width=1\linewidth]{images/experimentField/withLegend/expAEarly.png}
-        \subcaption*{$\mathrm{ST_{Early,dir}}$\\前方強め}
-    \end{minipage}%
-    \begin{minipage}[b]{.5\linewidth}
-        \centering
-        \includegraphics[width=1\linewidth]{images/experimentField/withLegend/expALate.png}
-        \subcaption*{$\mathrm{ST_{Late,dir}}$\\基準音場と同じ}
+    \includegraphics[width=1\linewidth]{images/experimentField/withLegend/00baseOnTargetLate.pdf}
+    %\subcaption*{$\mathrm{ST_{Late,dir}}$}
     \end{minipage}
-    \caption{音場Aの方向別ST}
-    \label{fig:音場Aの方向別ST}
-  \end{figure}
+  \caption{基準音場の方向別ST}
+  \label{fig:基準音場の方向別ST}
+\end{figure}
+\vspace{\stretch{1}}
 
-  \begin{figure}[H]
-    \begin{minipage}[b]{.5\linewidth}
+%=======================================================================
+\newpage
+
+\vspace*{\stretch{1}}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.8\linewidth]{images/fieldO_stRt.png}
+  \caption{基準音場の残響時間とST}
+  \label{fig:基準音場の残響時間とST}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.8\linewidth]{images/fieldO_EnergyDecayCurve.png}
+  \caption{基準音場の減衰曲線}
+  \label{fig:基準音場の減衰曲線}
+\end{figure}
+\vspace{\stretch{1}}
+%=======================================================================
+\newpage
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/base01overall.jpg}
+  \caption{AFC 操作画面とゲインの設定}
+  \label{fig:AFC操作画面}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/base02autoEQ1.jpg}
+    \subcaption*{System1}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/base02autoEQ2.jpg}
+    \subcaption*{System2}
+  \end{minipage}
+
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/base02autoEQ3.jpg}
+    \subcaption*{System3}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/base02autoEQ4.jpg}
+    \subcaption*{System4}
+  \end{minipage}
+
+  \begin{minipage}[b]{1\linewidth}
+    \centering
+    \includegraphics[width=.45\linewidth]{images/experimentField/afcParameters/base02autoEQ5.jpg}
+    \subcaption*{System5}
+  \end{minipage}
+
+  \centering
+  \caption{イコライザ 自動調整部}
+  \label{fig:イコライザ自動調整部}
+\end{figure}
+%=======================================================================
+\newpage
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.8\linewidth]{images/experimentField/afcParameters/base03FIR.jpg}
+  \caption{FIRフィルタと遅れ時間の設定}
+  \label{fig:FIRフィルタの設定}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/base04manualEQ1.jpg}
+    \subcaption*{System1}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/base04manualEQ2.jpg}
+    \subcaption*{System2}
+  \end{minipage}
+
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/base04manualEQ3.jpg}
+    \subcaption*{System3}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/base04manualEQ4.jpg}
+    \subcaption*{System4}
+  \end{minipage}
+
+  \begin{minipage}[b]{1\linewidth}
+    \centering
+    \includegraphics[width=.45\linewidth]{images/experimentField/afcParameters/base04manualEQ5.jpg}
+    \subcaption*{System5}
+  \end{minipage}
+
+  \centering
+  \caption{イコライザ 手動調整部1}
+  \label{fig:イコライザ手動調整部1}
+\end{figure}
+%=======================================================================
+\newpage
+\vspace*{\stretch{1}}
+\begin{figure}[H]
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/base05manualEQ2_1.jpg}
+    \subcaption*{System1}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/base05manualEQ2_2.jpg}
+    \subcaption*{System2}
+  \end{minipage}
+
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/base05manualEQ2_3.jpg}
+    \subcaption*{System3}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/base05manualEQ2_4.jpg}
+    \subcaption*{System4}
+  \end{minipage}
+
+  \begin{minipage}[b]{1\linewidth}
+    \centering
+    \includegraphics[width=.45\linewidth]{images/experimentField/afcParameters/base05manualEQ2_5.jpg}
+    \subcaption*{System5}
+  \end{minipage}
+
+  \centering
+  \caption{イコライザ 手動調整部2}
+  \label{fig:イコライザ手動調整部2}
+\end{figure}
+\vspace{\stretch{1}}
+%=======================================================================
+\newpage
+
+\subsection{方向の偏りをつけた音場}
+反射音到来方向が演奏者に与える影響について検討を行うため、基準音場に対して、初期反射音・後期反射音のそれぞれについて、前方からの反射を強めた音場と後方からの反射を強めた音場を実験音場として生成した。初期反射音の前方を強めた音場を音場α、初期反射音の後方を強めた音場を音場β、後期反射音の前方を強めた音場を音場γ、後期反射音の後方を強めた音場を音場δとする。生成した音場の$\mathrm{ST_{Early}}$、$\mathrm{ST_{Late}}$、残響時間をそれぞれ図\ref{fig:実験音場のSTEarly}から図\ref{fig:実験音場の残響時間}に示す。概ね同程度の音場が生成できていることが確認できたものの、いずれの音響指標も基準音場と比べてやや増加する傾向にあり、聴感印象の評価時に留意する必要がある。また、方向別STを図\ref{fig:音場αの方向別ST}から図\ref{fig:音場δの方向別ST}に示す。いずれの音場でも概ね意図通りの方向特性を持つことが確認できた。
+
+\begin{figure}[H]
+  \begin{minipage}[b]{1\linewidth}
+    \centering
+    \includegraphics[width=.7\linewidth]{images/reproducedStRt/stEarlies.pdf}
+    \caption{実験音場の$\mathrm{ST_{Early}}$}
+    \label{fig:実験音場のSTEarly}
+  \end{minipage}
+
+  \vspace{1\baselineskip}
+
+  \begin{minipage}[b]{1\linewidth}
+    \centering
+    \includegraphics[width=.7\linewidth]{images/reproducedStRt/stLates.pdf}
+    \caption{実験音場の$\mathrm{ST_{Late}}$}
+    \label{fig:実験音場のSTLate}
+  \end{minipage}
+
+  \vspace{1\baselineskip}
+  
+  \begin{minipage}[b]{1\linewidth}
+    \centering
+    \includegraphics[width=.7\linewidth]{images/reproducedStRt/rt.pdf}
+    \caption{実験音場の残響時間}
+    \label{fig:実験音場の残響時間}
+  \end{minipage}
+\end{figure}
+%=======================================================================
+\newpage
+
+\vspace*{\stretch{1}}
+\begin{figure}[H]
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=1\linewidth]{images/experimentField/withLegend/01alphaOnBaseEarly.pdf}
+    \subcaption*{$\mathrm{ST_{Early,dir}}$\\前方強め}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=1\linewidth]{images/experimentField/withLegend/05alphaOnBaseLate.pdf}
+    \subcaption*{$\mathrm{ST_{Late,dir}}$\\基準音場と同じ}
+  \end{minipage}
+  \caption{音場αの方向別ST}
+  \label{fig:音場αの方向別ST}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=1\linewidth]{images/experimentField/withLegend/02betaOnBaseEarly.pdf}
+    \subcaption*{$\mathrm{ST_{Early,dir}}$\\後方強め}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=1\linewidth]{images/experimentField/withLegend/06betaOnBaseLate.pdf}
+    \subcaption*{$\mathrm{ST_{Late,dir}}$\\基準音場と同じ}
+  \end{minipage}
+  \caption{音場βの方向別ST}
+  \label{fig:音場βの方向別ST}
+\end{figure}
+\vspace{\stretch{1}}
+
+%=======================================================================
+\newpage
+
+\vspace*{\stretch{1}}
+
+\begin{figure}[H]
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=1\linewidth]{images/experimentField/withLegend/03gammaOnBaseEarly.pdf}
+    \subcaption*{$\mathrm{ST_{Early,dir}}$\\基準音場と同じ}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
       \centering
-      \includegraphics[width=1\linewidth]{images/experimentField/withLegend/expBEarly.png}
-      \subcaption*{$\mathrm{ST_{Early,dir}}$\\後方強め}
-    \end{minipage}%
-    \begin{minipage}[b]{.5\linewidth}
-        \centering
-        \includegraphics[width=1\linewidth]{images/experimentField/withLegend/expBLate.png}
-        \subcaption*{$\mathrm{ST_{Late,dir}}$\\基準音場と同じ}
-    \end{minipage}
-    \caption{音場Bの方向別ST}
-    \label{fig:音場Bの方向別ST}
-  \end{figure}
+      \includegraphics[width=1\linewidth]{images/experimentField/withLegend/07gammaOnBaseLate.pdf}
+      \subcaption*{$\mathrm{ST_{Late,dir}}$\\前方強め}
+  \end{minipage}
+  \caption{音場γの方向別ST}
+  \label{fig:音場γの方向別ST}
+\end{figure}
 
-  \newpage
-
-  \begin{figure}[H]
-    \begin{minipage}[b]{.5\linewidth}
+\begin{figure}[H]
+  \begin{minipage}[b]{.5\linewidth}
       \centering
-      \includegraphics[width=1\linewidth]{images/experimentField/withLegend/expCEarly.png}
+      \includegraphics[width=1\linewidth]{images/experimentField/withLegend/04deltaOnBaseEarly.pdf}
       \subcaption*{$\mathrm{ST_{Early,dir}}$\\基準音場と同じ}
-    \end{minipage}%
-    \begin{minipage}[b]{.5\linewidth}
-        \centering
-        \includegraphics[width=1\linewidth]{images/experimentField/withLegend/expCLate.png}
-        \subcaption*{$\mathrm{ST_{Late,dir}}$\\前方強め}
-    \end{minipage}
-    \caption{音場Cの方向別ST}
-    \label{fig:音場Cの方向別ST}
-  \end{figure}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+      \centering
+      \includegraphics[width=1\linewidth]{images/experimentField/withLegend/08deltaOnBaseLate.pdf}
+      \subcaption*{$\mathrm{ST_{Late,dir}}$\\後方強め}
+  \end{minipage}
+  \caption{音場δの方向別ST}
+  \label{fig:音場δの方向別ST}
+\end{figure}
+\vspace{\stretch{1}}
 
-  \begin{figure}[H]
-    \begin{minipage}[b]{.5\linewidth}
-        \centering
-        \includegraphics[width=1\linewidth]{images/experimentField/withLegend/expDEarly.png}
-        \subcaption*{$\mathrm{ST_{Early,dir}}$\\基準音場と同じ}
-    \end{minipage}%
-    \begin{minipage}[b]{.5\linewidth}
-        \centering
-        \includegraphics[width=1\linewidth]{images/experimentField/withLegend/expDLate.png}
-        \subcaption*{$\mathrm{ST_{Late,dir}}$\\後方強め}
-    \end{minipage}
-    \caption{音場Dの方向別ST}
-    \label{fig:音場Dの方向別ST}
-  \end{figure}
+%=======================================================================
+\newpage
 
-%=====================================================================================
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/01alpha/01overall.jpg}
+  \caption{音場α 操作画面とゲインの設定}
+  \label{fig:alpha操作画面}
+\end{figure}
 
+\begin{figure}[H]
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/01alpha/03autoEQ1.jpg}
+    \subcaption*{System1}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/01alpha/03autoEQ2.jpg}
+    \subcaption*{System2}
+  \end{minipage}
 
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/01alpha/03autoEQ3.jpg}
+    \subcaption*{System3}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/01alpha/03autoEQ4.jpg}
+    \subcaption*{System4}
+  \end{minipage}
 
+  \begin{minipage}[b]{1\linewidth}
+    \centering
+    \includegraphics[width=.45\linewidth]{images/experimentField/afcParameters/01alpha/03autoEQ5.jpg}
+    \subcaption*{System5}
+  \end{minipage}
+
+  \centering
+  \caption{音場α イコライザ 自動調整部}
+  \label{fig:alphaイコライザ自動調整部}
+\end{figure}
+%=======================================================================
+\newpage
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.8\linewidth]{images/experimentField/afcParameters/01alpha/02FIR.jpg}
+  \caption{音場α FIRフィルタと遅れ時間の設定}
+  \label{fig:alphaFIRフィルタの設定}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/01alpha/04manualEQ1.jpg}
+    \subcaption*{System1}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/01alpha/04manualEQ2.jpg}
+    \subcaption*{System2}
+  \end{minipage}
+
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/01alpha/04manualEQ3.jpg}
+    \subcaption*{System3}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/01alpha/04manualEQ4.jpg}
+    \subcaption*{System4}
+  \end{minipage}
+
+  \begin{minipage}[b]{1\linewidth}
+    \centering
+    \includegraphics[width=.45\linewidth]{images/experimentField/afcParameters/01alpha/04manualEQ5.jpg}
+    \subcaption*{System5}
+  \end{minipage}
+
+  \centering
+  \caption{音場α イコライザ 手動調整部1}
+  \label{fig:alphaイコライザ手動調整部1}
+\end{figure}
+%=======================================================================
+\newpage
+\vspace*{\stretch{1}}
+\begin{figure}[H]
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/01alpha/05manualEQ6.jpg}
+    \subcaption*{System1}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/01alpha/05manualEQ7.jpg}
+    \subcaption*{System2}
+  \end{minipage}
+
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/01alpha/05manualEQ8.jpg}
+    \subcaption*{System3}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/01alpha/05manualEQ9.jpg}
+    \subcaption*{System4}
+  \end{minipage}
+
+  \begin{minipage}[b]{1\linewidth}
+    \centering
+    \includegraphics[width=.45\linewidth]{images/experimentField/afcParameters/01alpha/05manualEQ10.jpg}
+    \subcaption*{System5}
+  \end{minipage}
+
+  \centering
+  \caption{音場α イコライザ 手動調整部2}
+  \label{fig:alphaイコライザ手動調整部2}
+\end{figure}
+\vspace{\stretch{1}}
+
+%=======================================================================
+\newpage
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/02beta/01overall.jpg}
+  \caption{音場β 操作画面とゲインの設定}
+  \label{fig:beta操作画面}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/02beta/03autoEQ1.jpg}
+    \subcaption*{System1}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/02beta/03autoEQ2.jpg}
+    \subcaption*{System2}
+  \end{minipage}
+
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/02beta/03autoEQ3.jpg}
+    \subcaption*{System3}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/02beta/03autoEQ4.jpg}
+    \subcaption*{System4}
+  \end{minipage}
+
+  \begin{minipage}[b]{1\linewidth}
+    \centering
+    \includegraphics[width=.45\linewidth]{images/experimentField/afcParameters/02beta/03autoEQ5.jpg}
+    \subcaption*{System5}
+  \end{minipage}
+
+  \centering
+  \caption{音場β イコライザ 自動調整部}
+  \label{fig:betaイコライザ自動調整部}
+\end{figure}
+%=======================================================================
+\newpage
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.8\linewidth]{images/experimentField/afcParameters/02beta/02FIR.jpg}
+  \caption{音場β FIRフィルタと遅れ時間の設定}
+  \label{fig:betaFIRフィルタの設定}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/02beta/04manualEQ1.jpg}
+    \subcaption*{System1}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/02beta/04manualEQ2.jpg}
+    \subcaption*{System2}
+  \end{minipage}
+
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/02beta/04manualEQ3.jpg}
+    \subcaption*{System3}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/02beta/04manualEQ4.jpg}
+    \subcaption*{System4}
+  \end{minipage}
+
+  \begin{minipage}[b]{1\linewidth}
+    \centering
+    \includegraphics[width=.45\linewidth]{images/experimentField/afcParameters/02beta/04manualEQ5.jpg}
+    \subcaption*{System5}
+  \end{minipage}
+
+  \centering
+  \caption{音場β イコライザ 手動調整部1}
+  \label{fig:betaイコライザ手動調整部1}
+\end{figure}
+%=======================================================================
+\newpage
+\vspace*{\stretch{1}}
+\begin{figure}[H]
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/02beta/05manualEQ6.jpg}
+    \subcaption*{System1}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/02beta/05manualEQ7.jpg}
+    \subcaption*{System2}
+  \end{minipage}
+
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/02beta/05manualEQ8.jpg}
+    \subcaption*{System3}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/02beta/05manualEQ9.jpg}
+    \subcaption*{System4}
+  \end{minipage}
+
+  \begin{minipage}[b]{1\linewidth}
+    \centering
+    \includegraphics[width=.45\linewidth]{images/experimentField/afcParameters/02beta/05manualEQ10.jpg}
+    \subcaption*{System5}
+  \end{minipage}
+
+  \centering
+  \caption{音場β イコライザ 手動調整部2}
+  \label{fig:betaイコライザ手動調整部2}
+\end{figure}
+\vspace{\stretch{1}}
+%=======================================================================
+\newpage
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/03gamma/01overall.jpg}
+  \caption{音場γ 操作画面とゲインの設定}
+  \label{fig:gamma操作画面}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/03gamma/03autoEQ1.jpg}
+    \subcaption*{System1}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/03gamma/03autoEQ2.jpg}
+    \subcaption*{System2}
+  \end{minipage}
+
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/03gamma/03autoEQ3.jpg}
+    \subcaption*{System3}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/03gamma/03autoEQ4.jpg}
+    \subcaption*{System4}
+  \end{minipage}
+
+  \begin{minipage}[b]{1\linewidth}
+    \centering
+    \includegraphics[width=.45\linewidth]{images/experimentField/afcParameters/03gamma/03autoEQ5.jpg}
+    \subcaption*{System5}
+  \end{minipage}
+
+  \centering
+  \caption{音場γ イコライザ 自動調整部}
+  \label{fig:gammaイコライザ自動調整部}
+\end{figure}
+%=======================================================================
+\newpage
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.8\linewidth]{images/experimentField/afcParameters/03gamma/02FIR.jpg}
+  \caption{音場γ FIRフィルタと遅れ時間の設定}
+  \label{fig:gammaFIRフィルタの設定}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/03gamma/04manualEQ1.jpg}
+    \subcaption*{System1}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/03gamma/04manualEQ2.jpg}
+    \subcaption*{System2}
+  \end{minipage}
+
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/03gamma/04manualEQ3.jpg}
+    \subcaption*{System3}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/03gamma/04manualEQ4.jpg}
+    \subcaption*{System4}
+  \end{minipage}
+
+  \begin{minipage}[b]{1\linewidth}
+    \centering
+    \includegraphics[width=.45\linewidth]{images/experimentField/afcParameters/03gamma/04manualEQ5.jpg}
+    \subcaption*{System5}
+  \end{minipage}
+
+  \centering
+  \caption{音場γ イコライザ 手動調整部1}
+  \label{fig:gammaイコライザ手動調整部1}
+\end{figure}
+%=======================================================================
+\newpage
+\vspace*{\stretch{1}}
+\begin{figure}[H]
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/03gamma/05manualEQ6.jpg}
+    \subcaption*{System1}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/03gamma/05manualEQ7.jpg}
+    \subcaption*{System2}
+  \end{minipage}
+
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/03gamma/05manualEQ8.jpg}
+    \subcaption*{System3}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/03gamma/05manualEQ9.jpg}
+    \subcaption*{System4}
+  \end{minipage}
+
+  \begin{minipage}[b]{1\linewidth}
+    \centering
+    \includegraphics[width=.45\linewidth]{images/experimentField/afcParameters/03gamma/05manualEQ10.jpg}
+    \subcaption*{System5}
+  \end{minipage}
+
+  \centering
+  \caption{音場γ イコライザ 手動調整部2}
+  \label{fig:gammaイコライザ手動調整部2}
+\end{figure}
+\vspace{\stretch{1}}
+
+%=======================================================================
+\newpage
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/04delta/01overall.jpg}
+  \caption{音場δ 操作画面とゲインの設定}
+  \label{fig:delta操作画面}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/04delta/03autoEQ1.jpg}
+    \subcaption*{System1}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/04delta/03autoEQ2.jpg}
+    \subcaption*{System2}
+  \end{minipage}
+
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/04delta/03autoEQ3.jpg}
+    \subcaption*{System3}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/04delta/03autoEQ4.jpg}
+    \subcaption*{System4}
+  \end{minipage}
+
+  \begin{minipage}[b]{1\linewidth}
+    \centering
+    \includegraphics[width=.45\linewidth]{images/experimentField/afcParameters/04delta/03autoEQ5.jpg}
+    \subcaption*{System5}
+  \end{minipage}
+
+  \centering
+  \caption{音場δ イコライザ 自動調整部}
+  \label{fig:deltaイコライザ自動調整部}
+\end{figure}
+%=======================================================================
+\newpage
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.8\linewidth]{images/experimentField/afcParameters/04delta/02FIR.jpg}
+  \caption{音場δ FIRフィルタと遅れ時間の設定}
+  \label{fig:deltaFIRフィルタの設定}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/04delta/04manualEQ1.jpg}
+    \subcaption*{System1}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/04delta/04manualEQ2.jpg}
+    \subcaption*{System2}
+  \end{minipage}
+
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/04delta/04manualEQ3.jpg}
+    \subcaption*{System3}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/04delta/04manualEQ4.jpg}
+    \subcaption*{System4}
+  \end{minipage}
+
+  \begin{minipage}[b]{1\linewidth}
+    \centering
+    \includegraphics[width=.45\linewidth]{images/experimentField/afcParameters/04delta/04manualEQ5.jpg}
+    \subcaption*{System5}
+  \end{minipage}
+
+  \centering
+  \caption{音場δ イコライザ 手動調整部1}
+  \label{fig:deltaイコライザ手動調整部1}
+\end{figure}
+%=======================================================================
+\newpage
+\vspace*{\stretch{1}}
+\begin{figure}[H]
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/04delta/05manualEQ6.jpg}
+    \subcaption*{System1}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/04delta/05manualEQ7.jpg}
+    \subcaption*{System2}
+  \end{minipage}
+
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/04delta/05manualEQ8.jpg}
+    \subcaption*{System3}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/04delta/05manualEQ9.jpg}
+    \subcaption*{System4}
+  \end{minipage}
+
+  \begin{minipage}[b]{1\linewidth}
+    \centering
+    \includegraphics[width=.45\linewidth]{images/experimentField/afcParameters/04delta/05manualEQ10.jpg}
+    \subcaption*{System5}
+  \end{minipage}
+
+  \centering
+  \caption{音場δ イコライザ 手動調整部2}
+  \label{fig:deltaイコライザ手動調整部2}
+\end{figure}
+\vspace{\stretch{1}}
+
+%======================================================================
 
 \clearpage
 
