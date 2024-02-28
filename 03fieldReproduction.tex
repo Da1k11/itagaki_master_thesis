@@ -12,14 +12,14 @@
 
 \section{音場支援システムAFCについて}
 
-\subsection*{音場支援システムの概要}
+\subsection{音場支援システムの概要}
 第1章4節でも触れたように、音場支援システム（Active Field Control Enhance、AFC）は、一つの空間において多様な演目を最適な響きの中で行いたいというモチベーションから開発されたシステムであり、最新の電気音響・信号処理技術を用いて、室内の響きや空間の拡がり・音量感などの聴感印象を自然に変化させることができる\cite{AFCの概要}。音源自体に人工的なリバーブを付加して異なる音の印象を作り出す手法とは異なり、楽器や歌声の自然な聴こえ方を保ちながら、その空間に拡がる音の残響感や音量感をコントロールし、用途に適した音響空間を提供できる点にその特徴がある。
 
 マイクロフォンとスピーカーを配置して音場を生成するシステムにおける信号処理の方式は、マイクで収音した音をスピーカーから再生し、スピーカーからの再生音に空間固有の響きが加わった音を再びマイクで収音する音響的フィードバックを利用する室内音場制御方式と、収音した音に様々な実測インパルス応答のデータを畳み込むことで任意の音場を再現する音場合成方式の二つの方式に大別され、AFCではこれら二つの方式を兼ね備えたハイブリッドなシステムとして構成されている\cite{AFCEnhance}。
 
 %=======================================================================
 \newpage
-\subsection*{音場支援システムの仕組み}
+\subsection{音場支援システムの仕組み}
 響きの聴覚印象には初期反射音と残響音（後期反射音）がそれぞれ異なる影響を与えていると考えられ、AFCにおける音響信号の処理系統も、初期反射音制御部と後期反射音制御部に大きく分かれてそれぞれの反射音成分をある程度独立に制御している。この概略図を図\ref{fig:AFCにおける初期反射音と後期反射音の制御の概略図}に示す。
 
 どちらの制御部においても、マイクロホンで収音した音に対してインパルス応答の畳み込みによる響きの付加を行ってからスピーカーでその信号を再生し、響きを増幅させる点は共通している。初期反射音制御部では演奏者の付近に設置した指向性マイクによって主に直接音と舞台上からの初期反射音を収音して初期反射音成分に相当する響きをスピーカーから再生させるのに対し、後期反射音制御部では演奏者から遠方に付置した全指向性マイクによって主に空間の残響音とスピーカーから再生される音響フィードバック成分を収音して後期反射音に相当する響きをスピーカーから再生させている。
@@ -62,7 +62,7 @@ AFCではスピーカーから再生された音がマイクへ戻る音響的�
 %=======================================================================
 
 \newpage
-\subsection*{実験室におけるAFCのシステム機器配置}
+\subsection{実験室におけるAFCのシステム機器配置}
 もともとの響きの小さい室でAFCを用いることにより、大きな制御幅を得て自由度の高い音場の生成を行えることが期待できるため、本実験では半無響室にAFCを導入して用いることとした。導入したAFCシステムを構成する音響機材は4つのカージオイドマイク、4つの無指向性マイク、および20個のスピーカーであり、実験室の内部の様子を図\ref{fig:実験室の内部の様子}に、音響機材の配置を図\ref{fig:AFCのシステム機器配置}に示す。
 
 また、生成する音場の評価を行うための音響測定は実験室の中央で行うものとし、音響測定時の測定機器の配置を図\ref{fig:音響測定機器の配置}に、そのときの様子を図\ref{fig:音響測定時の様子}示す。なお、紙面の上方を実験室の前方として実験室内における方向を定義した。
@@ -141,7 +141,7 @@ AFCではスピーカーから再生された音がマイクへ戻る音響的�
 \section{音場生成の準備}
 前節にてAFCシステムの仕組みと本研究で用いる実験室およびシステム機器構成について紹介した。本節ではAFCで音場生成を行う前の準備事項に関して、まず実験室に配置したマイクとスピーカーのルーティングについて、続いて調整で用いるFIRフィルタについて、最後に実験室における響きの制御幅について述べる。
 
-\subsection*{マイクとスピーカーのルーティング}
+\subsection{マイクとスピーカーのルーティング}
 2章4節にて設定した目標値を踏まえて、まず音場生成時のマイクとスピーカーのルーティングを決定する。前節で示したように、AFCのマイク入力はbusと呼ばれる信号処理系に割り当てられ、さらに4つのbusを一つのSystemとして取り扱う。本研究では、5つのSystemを作成して音場の生成を行った。
 
 System1は、大まかな初期反射音成分の付加のため、入力系としてカージオイドマイクであるMic.1〜4の信号を用い、出力系として後方側からの再生音がやや多くなるように全方向のスピーカーを割り当てた。
@@ -170,10 +170,10 @@ System5は、後期反射音の制御系だが、EMRの利用による後期反�
 
 %=======================================================================
 \newpage
-\subsection*{重畳に用いるFIRフィルタ}
-響きの可変幅を十分に確保できるよう、重畳するFIRフィルタには図\ref{fig:FIRフィルタを測定したコンサートホール}に示す2000席程度の豊かな響きを持つコンサートホールにて実測したインパルス応答を用いた。初期反射音制御部には舞台付近で測定したインパルス応答を、後期反射音制御部には舞台から遠方にて測定したインパルス応答を用いた。それぞれについて、ともに異なる4点で測定したインパルス応答を用いており、これは完全に同じインパルス応答を用いることによってAFCシステム内のループごとの周波数特性が近くなることでカラレーションに対する安定性が低下するのを防ぐことを目的としている。重畳に用いたインパルス応答の時間波形を図\ref{fig:初期反射音の重畳に用いたFIRフィルタ}および図\ref{fig:後期反射音の重畳に用いたフィルタ}に示す。
+\subsection{重畳に用いるFIRフィルタ}
+響きの可変幅を十分に確保できるよう、重畳するFIRフィルタには図\ref{fig:FIRフィルタを測定したコンサートホール}に示す2000席程度の豊かな響きを持つコンサートホールにて実測したインパルス応答を用いた。初期反射音制御部には舞台付近で測定したインパルス応答を、後期反射音制御部には舞台から遠方にて測定したインパルス応答を用いた。それぞれについて、ともに異なる4点で測定したインパルス応答を用いているが、これは完全に同じインパルス応答を用いることによってAFCシステム内のループごとの周波数特性が近くなることでカラレーションに対する安定性が低下するのを防ぐことを目的としている。また、反射音としての聴感的な自然さを向上させるため、実測したインパルス応答から直接音が事前に除かれたものを用いている。さらに、初期反射音制御部のインパルス応答は、合成された響きが長時間に渡ることを防ぐため、$\SI{300}{ms}$で減衰するように事前に信号長を制限した。
 
-\lipsum[1-2]
+重畳に用いたインパルス応答の時間波形を図\ref{fig:初期反射音の重畳に用いたFIRフィルタ}および図\ref{fig:後期反射音の重畳に用いたフィルタ}に示す。
 
 \vspace{\stretch{1}}
 \begin{figure}[H]
@@ -247,7 +247,7 @@ System5は、後期反射音の制御系だが、EMRの利用による後期反�
 %=======================================================================
 
 \newpage
-\subsection*{AFCの音場生成における制御幅}
+\subsection{AFCの音場生成における制御幅}
 実験室に響きを付加するにあたり、目標とした音場が実験室で実現可能な響きの幅、すなわち最小の響きの条件と最大の響きの範囲に収まることを確認する必要がある。
 
 AFCは響きを増幅するシステムであるため、実験室で実現可能な最小の響きは、AFCをオフにしたときの響きとなる。AFCをオフししたときの$\mathrm{ST_{Early,dir}}$、$\mathrm{ST_{Late,dir}}$を表\ref{table:響き小の方向別ST}に示す。
@@ -328,17 +328,17 @@ AFCは響きを増幅するシステムであるため、実験室で実現可�
 \section{生成音場の調整方法}
 図\ref{fig:busごとの信号処理の概要}および図\ref{fig:Systemによる信号処理の概要}に示したように、AFCにおける調整項目はFIRフィルタの畳み込み、遅れ時間の付加、音量の増減、イコライザによる周波数特性の補正からなる。いずれの調整においても、AFCのシステムで響きが付加された室内での音響測定と調整項目の変更を繰り返し、所望の値に近づけていく必要がある。なお、本実験で用いた実験室における音響測定では、部屋の広さによる制約により、直接音の減衰が大きいため残響時間の評価としてよく用いられる $\mathrm{T_{20}}$ または $\mathrm{T_{30}}$ を適切に測定することができない。そこで本研究では、$\mathrm{ST}$の測定条件によるインパルス応答の測定結果からエネルギーの減衰曲線を描き、$\SI{-15}{dB}$から$\SI{-45}{dB}$までの減衰曲線の傾きを読むことにより残響時間を求めることとした。
 
-\subsection*{FIRフィルタの設定}
+\subsubsection{FIRフィルタの設定}
 $\mathrm{ST_{Early,dir}}$および$\mathrm{ST_{Late,dir}}$を目標値に近づけて制御するためには、初期反射音と後期反射音の成分をある程度独立に制御することが必要となる。初期反射音制御部のために付加したエネルギーが後期反射音の評価区間に漏れ出す量を少なくするため、初期反射音制御部では重畳するFIRフィルタにフェードアウトを設定することにより信号長を$\SI{120}{ms}$に限定した。
 また、生成した音場の残響時間は通常よくあるコンサートホールでの残響時間よりもかなり長くなる傾向があったため、後期反射音制御部で重畳するFIRフィルタにフェードアウトを設定することで残響時間を短くし、$\SI{1.8}{秒}$程度の自然な長さになるよう調整した。
   
-\subsection*{遅れ時間の付与}
+\subsubsection{遅れ時間の付与}
 後期反射音制御部では、反射音の付加に長い遅れ時間を加えることで$\mathrm{ST_{Early,dir}}$の評価区間に入るエネルギーを減らすことができるが、遅れ時間が大きすぎるとエコー障害が生じる恐れがある。本研究では、$\SI{45}{ms}$の遅れ時間を付け加えることにより、聴感的な自然さを保ちつつ$\mathrm{ST_{Early,dir}}$への影響を低減した。
 
-\subsection*{音量の増減}
+\subsubsection{音量の増減}
 方向別STの調整には主にゲインの変更による音量の増減を用いた。初期反射音制御部では、主に後方からの反射音を強めるために後方の音量を増加させたほか、左右からの反射音供給量を増減させて左右の偏りがなくなるよう調整した。後期反射音制御部では、方向別の偏りがなるべく小さくなるように音量を調整した。
 
-\subsection*{イコライザによる周波数特性の補正}
+\subsubsection{イコライザによる周波数特性の補正}
 AFCのイコライザ設定は自動設定部と手動設定部に分かれており、主にハウリングを抑えるための大まかな設定に自動設定部を、カラレーションや聴感上の不自然さの低減に手動調整部を用いる。本研究においては、上記の役割に加え、手動調整部のイコライザの設定の変更を繰り返して、オクターブバンドごとのSTおよび残響時間の値が極端にばらつくことを防ぐように周波数特性を調整した。
 
 %=====================================================================================
@@ -517,7 +517,7 @@ AFCの調整パラメータについて、図\ref{fig:AFC操作画面}から図\
 \newpage
 
 \subsection{方向の偏りをつけた音場}
-反射音到来方向が演奏者に与える影響について検討を行うため、基準音場に対して、初期反射音・後期反射音のそれぞれについて、前方からの反射を強めた音場と後方からの反射を強めた音場を実験音場として生成した。初期反射音の前方を強めた音場を音場α、初期反射音の後方を強めた音場を音場β、後期反射音の前方を強めた音場を音場γ、後期反射音の後方を強めた音場を音場δとする。生成した音場の$\mathrm{ST_{Early}}$、$\mathrm{ST_{Late}}$、残響時間をそれぞれ図\ref{fig:実験音場のSTEarly}から図\ref{fig:実験音場の残響時間}に示す。概ね同程度の音場が生成できていることが確認できたものの、いずれの音響指標も基準音場と比べてやや増加する傾向にあり、聴感印象の評価時に留意する必要がある。また、方向別STを図\ref{fig:音場αの方向別ST}から図\ref{fig:音場δの方向別ST}に示す。いずれの音場でも概ね意図通りの方向特性を持つことが確認できた。
+基準音場に対して、付加する音のゲインおよび手動調整部のイコライザの設定を変更して調整し、初期反射音・後期反射音のそれぞれについて、前方からの反射を強めた音場と後方からの反射を強めた音場を実験音場として生成した。初期反射音の前方を強めた音場を音場α、初期反射音の後方を強めた音場を音場β、後期反射音の前方を強めた音場を音場γ、後期反射音の後方を強めた音場を音場δとする。生成した音場の$\mathrm{ST_{Early}}$、$\mathrm{ST_{Late}}$、残響時間をそれぞれ図\ref{fig:実験音場のSTEarly}から図\ref{fig:実験音場の残響時間}に示す。概ね同程度の音場が生成できていることが確認できたものの、いずれの音響指標も基準音場と比べてやや増加する傾向にあり、聴感印象の評価時に留意する必要がある。また、方向別STを図\ref{fig:音場αの方向別ST}から図\ref{fig:音場δの方向別ST}に示す。いずれの音場でも概ね意図通りの方向特性を持つことが確認できた。各音場条件について、AFCの設定を図\ref{fig:alpha操作画面}から図\ref{fig:deltaイコライザ手動調整部2}に示す。
 
 \begin{figure}[H]
   \begin{minipage}[b]{1\linewidth}
@@ -549,6 +549,7 @@ AFCの調整パラメータについて、図\ref{fig:AFC操作画面}から図\
 \newpage
 
 \vspace*{\stretch{1}}
+
 \begin{figure}[H]
   \begin{minipage}[b]{.5\linewidth}
     \centering
@@ -578,6 +579,7 @@ AFCの調整パラメータについて、図\ref{fig:AFC操作画面}から図\
   \caption{音場βの方向別ST}
   \label{fig:音場βの方向別ST}
 \end{figure}
+
 \vspace{\stretch{1}}
 
 %=======================================================================
@@ -629,49 +631,6 @@ AFCの調整パラメータについて、図\ref{fig:AFC操作画面}から図\
 \begin{figure}[H]
   \begin{minipage}[b]{.5\linewidth}
     \centering
-    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/01alpha/03autoEQ1.jpg}
-    \subcaption*{System1}
-  \end{minipage}%
-  \begin{minipage}[b]{.5\linewidth}
-    \centering
-    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/01alpha/03autoEQ2.jpg}
-    \subcaption*{System2}
-  \end{minipage}
-
-  \begin{minipage}[b]{.5\linewidth}
-    \centering
-    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/01alpha/03autoEQ3.jpg}
-    \subcaption*{System3}
-  \end{minipage}%
-  \begin{minipage}[b]{.5\linewidth}
-    \centering
-    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/01alpha/03autoEQ4.jpg}
-    \subcaption*{System4}
-  \end{minipage}
-
-  \begin{minipage}[b]{1\linewidth}
-    \centering
-    \includegraphics[width=.45\linewidth]{images/experimentField/afcParameters/01alpha/03autoEQ5.jpg}
-    \subcaption*{System5}
-  \end{minipage}
-
-  \centering
-  \caption{音場α イコライザ 自動調整部}
-  \label{fig:alphaイコライザ自動調整部}
-\end{figure}
-%=======================================================================
-\newpage
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=.8\linewidth]{images/experimentField/afcParameters/01alpha/02FIR.jpg}
-  \caption{音場α FIRフィルタと遅れ時間の設定}
-  \label{fig:alphaFIRフィルタの設定}
-\end{figure}
-
-\begin{figure}[H]
-  \begin{minipage}[b]{.5\linewidth}
-    \centering
     \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/01alpha/04manualEQ1.jpg}
     \subcaption*{System1}
   \end{minipage}%
@@ -702,9 +661,11 @@ AFCの調整パラメータについて、図\ref{fig:AFC操作画面}から図\
   \caption{音場α イコライザ 手動調整部1}
   \label{fig:alphaイコライザ手動調整部1}
 \end{figure}
-%=======================================================================
+%======================================================================
 \newpage
+
 \vspace*{\stretch{1}}
+
 \begin{figure}[H]
   \begin{minipage}[b]{.5\linewidth}
     \centering
@@ -738,9 +699,10 @@ AFCの調整パラメータについて、図\ref{fig:AFC操作画面}から図\
   \caption{音場α イコライザ 手動調整部2}
   \label{fig:alphaイコライザ手動調整部2}
 \end{figure}
+
 \vspace{\stretch{1}}
 
-%=======================================================================
+%======================================================================
 \newpage
 
 \begin{figure}[H]
@@ -748,49 +710,6 @@ AFCの調整パラメータについて、図\ref{fig:AFC操作画面}から図\
   \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/02beta/01overall.jpg}
   \caption{音場β 操作画面とゲインの設定}
   \label{fig:beta操作画面}
-\end{figure}
-
-\begin{figure}[H]
-  \begin{minipage}[b]{.5\linewidth}
-    \centering
-    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/02beta/03autoEQ1.jpg}
-    \subcaption*{System1}
-  \end{minipage}%
-  \begin{minipage}[b]{.5\linewidth}
-    \centering
-    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/02beta/03autoEQ2.jpg}
-    \subcaption*{System2}
-  \end{minipage}
-
-  \begin{minipage}[b]{.5\linewidth}
-    \centering
-    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/02beta/03autoEQ3.jpg}
-    \subcaption*{System3}
-  \end{minipage}%
-  \begin{minipage}[b]{.5\linewidth}
-    \centering
-    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/02beta/03autoEQ4.jpg}
-    \subcaption*{System4}
-  \end{minipage}
-
-  \begin{minipage}[b]{1\linewidth}
-    \centering
-    \includegraphics[width=.45\linewidth]{images/experimentField/afcParameters/02beta/03autoEQ5.jpg}
-    \subcaption*{System5}
-  \end{minipage}
-
-  \centering
-  \caption{音場β イコライザ 自動調整部}
-  \label{fig:betaイコライザ自動調整部}
-\end{figure}
-%=======================================================================
-\newpage
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=.8\linewidth]{images/experimentField/afcParameters/02beta/02FIR.jpg}
-  \caption{音場β FIRフィルタと遅れ時間の設定}
-  \label{fig:betaFIRフィルタの設定}
 \end{figure}
 
 \begin{figure}[H]
@@ -826,7 +745,9 @@ AFCの調整パラメータについて、図\ref{fig:AFC操作画面}から図\
   \caption{音場β イコライザ 手動調整部1}
   \label{fig:betaイコライザ手動調整部1}
 \end{figure}
-%=======================================================================
+
+%======================================================================
+
 \newpage
 \vspace*{\stretch{1}}
 \begin{figure}[H]
@@ -863,7 +784,7 @@ AFCの調整パラメータについて、図\ref{fig:AFC操作画面}から図\
   \label{fig:betaイコライザ手動調整部2}
 \end{figure}
 \vspace{\stretch{1}}
-%=======================================================================
+%======================================================================
 \newpage
 
 \begin{figure}[H]
@@ -871,49 +792,6 @@ AFCの調整パラメータについて、図\ref{fig:AFC操作画面}から図\
   \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/03gamma/01overall.jpg}
   \caption{音場γ 操作画面とゲインの設定}
   \label{fig:gamma操作画面}
-\end{figure}
-
-\begin{figure}[H]
-  \begin{minipage}[b]{.5\linewidth}
-    \centering
-    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/03gamma/03autoEQ1.jpg}
-    \subcaption*{System1}
-  \end{minipage}%
-  \begin{minipage}[b]{.5\linewidth}
-    \centering
-    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/03gamma/03autoEQ2.jpg}
-    \subcaption*{System2}
-  \end{minipage}
-
-  \begin{minipage}[b]{.5\linewidth}
-    \centering
-    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/03gamma/03autoEQ3.jpg}
-    \subcaption*{System3}
-  \end{minipage}%
-  \begin{minipage}[b]{.5\linewidth}
-    \centering
-    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/03gamma/03autoEQ4.jpg}
-    \subcaption*{System4}
-  \end{minipage}
-
-  \begin{minipage}[b]{1\linewidth}
-    \centering
-    \includegraphics[width=.45\linewidth]{images/experimentField/afcParameters/03gamma/03autoEQ5.jpg}
-    \subcaption*{System5}
-  \end{minipage}
-
-  \centering
-  \caption{音場γ イコライザ 自動調整部}
-  \label{fig:gammaイコライザ自動調整部}
-\end{figure}
-%=======================================================================
-\newpage
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=.8\linewidth]{images/experimentField/afcParameters/03gamma/02FIR.jpg}
-  \caption{音場γ FIRフィルタと遅れ時間の設定}
-  \label{fig:gammaFIRフィルタの設定}
 \end{figure}
 
 \begin{figure}[H]
@@ -949,7 +827,8 @@ AFCの調整パラメータについて、図\ref{fig:AFC操作画面}から図\
   \caption{音場γ イコライザ 手動調整部1}
   \label{fig:gammaイコライザ手動調整部1}
 \end{figure}
-%=======================================================================
+%======================================================================
+
 \newpage
 \vspace*{\stretch{1}}
 \begin{figure}[H]
@@ -1000,49 +879,6 @@ AFCの調整パラメータについて、図\ref{fig:AFC操作画面}から図\
 \begin{figure}[H]
   \begin{minipage}[b]{.5\linewidth}
     \centering
-    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/04delta/03autoEQ1.jpg}
-    \subcaption*{System1}
-  \end{minipage}%
-  \begin{minipage}[b]{.5\linewidth}
-    \centering
-    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/04delta/03autoEQ2.jpg}
-    \subcaption*{System2}
-  \end{minipage}
-
-  \begin{minipage}[b]{.5\linewidth}
-    \centering
-    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/04delta/03autoEQ3.jpg}
-    \subcaption*{System3}
-  \end{minipage}%
-  \begin{minipage}[b]{.5\linewidth}
-    \centering
-    \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/04delta/03autoEQ4.jpg}
-    \subcaption*{System4}
-  \end{minipage}
-
-  \begin{minipage}[b]{1\linewidth}
-    \centering
-    \includegraphics[width=.45\linewidth]{images/experimentField/afcParameters/04delta/03autoEQ5.jpg}
-    \subcaption*{System5}
-  \end{minipage}
-
-  \centering
-  \caption{音場δ イコライザ 自動調整部}
-  \label{fig:deltaイコライザ自動調整部}
-\end{figure}
-%=======================================================================
-\newpage
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=.8\linewidth]{images/experimentField/afcParameters/04delta/02FIR.jpg}
-  \caption{音場δ FIRフィルタと遅れ時間の設定}
-  \label{fig:deltaFIRフィルタの設定}
-\end{figure}
-
-\begin{figure}[H]
-  \begin{minipage}[b]{.5\linewidth}
-    \centering
     \includegraphics[width=.9\linewidth]{images/experimentField/afcParameters/04delta/04manualEQ1.jpg}
     \subcaption*{System1}
   \end{minipage}%
@@ -1075,7 +911,9 @@ AFCの調整パラメータについて、図\ref{fig:AFC操作画面}から図\
 \end{figure}
 %=======================================================================
 \newpage
+
 \vspace*{\stretch{1}}
+
 \begin{figure}[H]
   \begin{minipage}[b]{.5\linewidth}
     \centering
@@ -1109,6 +947,7 @@ AFCの調整パラメータについて、図\ref{fig:AFC操作画面}から図\
   \caption{音場δ イコライザ 手動調整部2}
   \label{fig:deltaイコライザ手動調整部2}
 \end{figure}
+
 \vspace{\stretch{1}}
 
 %======================================================================
